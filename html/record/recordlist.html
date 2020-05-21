@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+     <title>VACARE - 知苗</title>
+
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+     <meta name="description" content="">
+     <meta name="keywords" content="">
+     <meta name="team" content="">
+     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+     <link rel="stylesheet" href="../css/bootstrap.min.css">
+     <link rel="stylesheet" href="../css/owl.carousel.css">
+     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+     <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+     <!-- MAIN CSS -->
+     <link rel="stylesheet" href="../css/tooplate-style.css">
+     <link rel="stylesheet" href="../css/record.css">
+</head>
+
+<body>
+
+     <!-- PRE LOADER -->
+     <section class="preloader">
+          <div class="spinner">
+
+               <span class="spinner-rotate"></span>
+
+          </div>
+     </section>
+
+
+     <!-- MENU -->
+     <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+          <div class="container">
+
+               <div class="navbar-header">
+
+                    <!-- lOGO TEXT HERE -->
+                    <a href="../index.html" class="navbar-brand">VACARE</a>
+               </div>
+
+               <!-- MENU LINKS -->
+               <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                         <li><a href="../index.html" class="smoothScroll">首页</a></li>
+                         <li><a href="#" class="smoothScroll">疫苗资讯</a></li>
+                         <li><a href="#" class="smoothScroll">疫苗查询</a></li>
+                         <li><a href="#" class="smoothScroll">疫苗流向</a></li>
+                         <li><a href="#" class="smoothScroll">接种信息</a></li>
+                         <li><a href="recordlist.html" class="smoothScroll">疫苗本</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="float: right;">
+                         <!-- 小人菜单栏-->
+                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
+                                        class="fa fa-user-circle-o fa-lg"></i></a>
+                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                                   <li><a class="dropdown-item" href="Manager_Changepwd.html"><i
+                                                  class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+                                   <li><a class="dropdown-item" href="Manager_Changepwd.html"><i
+                                                  class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+                                   <li><a class="dropdown-item" href="../index.html"><i
+                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+                              </ul>
+                         </li>
+                    </ul>
+               </div>
+          </div>
+     </section>
+
+
+     <!-- FEATURE -->
+     <section id="record" data-stellar-background-ratio="0.5">
+          <div class="container">
+               <div class="row">
+                    <div class="col-md-3 ">
+                         <div class="block nav">
+                              <div class="block-body active" style=" font-size: 26px">
+                                   <div class="row">
+                                        <div class="col-md-2">
+                                             <i class="fa fa-book"></i>
+                                        </div>
+                                        <div class="col-md-8">
+                                             <h5>我的疫苗本</h5>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="block-body" style=" font-size: 26px">
+                                   <div class="row">
+                                        <div class="col-md-2">
+                                             <i class="fa fa-list"></i>
+                                        </div>
+                                        <div class="col-md-8">
+                                             <h5>疫苗范本</h5>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div class="block-body" style=" font-size: 26px">
+                                   <div class="row">
+                                        <div class="col-md-2">
+                                             <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="col-md-8">
+                                             <h5>疫苗推荐</h5>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                         <div class="block add">
+                              <div class="block-body" style=" font-size: 26px">
+                                   <a data-toggle="modal" data-target="#addtype1">
+                                        <div class="row">
+                                             <div class="col-md-2">
+                                                  <i class="fa fa-plus"></i>
+                                             </div>
+                                             <div class="col-md-8">
+                                                  <h5>新增疫苗本</h5>
+                                             </div>
+                                        </div>
+                                   </a>
+                              </div>
+                              <div class="block-body" style=" font-size: 26px">
+                                   <a data-toggle="modal" data-target="#addtype2">
+                                        <div class="row">
+                                             <div class="col-md-2">
+                                                  <i class="fa fa-cloud"></i>
+                                             </div>
+                                             <div class="col-md-8">
+                                                  <h5>疫苗本记录</h5>
+                                             </div>
+                                        </div>
+                                   </a>
+                              </div>
+                         </div>
+                    </div>
+                    <div class="col-md-9">
+                         <div class="block">
+                              <div class="block-body" style="padding-bottom: 0px;">
+                                   <div class="page-header" style="margin-bottom: 0px;">
+                                        <h2>疫苗本清单 &nbsp; <small>共有2个疫苗本</small></h2>
+                                   </div>
+                              </div>
+                              <div class="vaccine-record">
+                                   <a href="recordtype1.html">
+                                        <div class="row">
+                                             <div class="col-md-2">
+                                                  <div class="vaccine-image" style="height:105px">
+                                                       <img>
+                                                  </div>
+                                             </div>
+                                             <div class="col-md-10">
+                                                  <h4>宝宝的疫苗本</h4>
+                                                  <h5>距离下一次注射还有8天</h5>
+                                                  <div class="record-icons" style="font-size: 24px;">
+                                                       <a><i class="record-icon fa fa-cog"
+                                                                 style="padding-left:15px"></i></a>
+                                                       <a><i class="record-icon fa fa-tag"
+                                                                 style="padding-left:15px"></i></a>
+                                                       <a><i class="record-icon fa fa-photo"
+                                                                 style="padding-left:15px"></i></a>
+                                                       <a><i class="record-icon fa fa-trash"
+                                                                 style="padding-left:15px"></i></a>
+                                                  </div>
+                                             </div>
+                                        </div>
+                                   </a>
+                              </div>
+                              <div class="vaccine-record">
+                                   <div class="row">
+                                        <div class="col-md-2">
+                                             <div class="vaccine-image" style="height:105px">
+                                                  <img>
+                                             </div>
+                                        </div>
+                                        <div class="col-md-10">
+                                             <h4>宝宝的疫苗本</h4>
+                                             <h5>距离下一次注射还有8天</h5>
+                                             <div class="record-icons" style="font-size: 24px;">
+                                                  <a><i class="record-icon fa fa-cog" style="padding-left:15px"></i></a>
+                                                  <a><i class="record-icon fa fa-tag" style="padding-left:15px"></i></a>
+                                                  <a><i class="record-icon fa fa-photo"
+                                                            style="padding-left:15px"></i></a>
+                                                  <a><i class="record-icon fa fa-trash"
+                                                            style="padding-left:15px"></i></a>
+                                             </div>
+                                        </div>
+                                   </div>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </section>
+
+     <!-- FOOTER -->
+     <footer id="footer">
+          <div class="container">
+               <div class="row">
+                    <div class="copyright-text col-md-12 col-sm-12">
+                         <div class="col-md-6 col-sm-6">
+                              <p>Copyright &copy; 2020 VACARE - for all</p>
+                         </div>
+                         <div class="col-md-6 col-sm-6">
+                              <ul class="social-icon">
+                                   <li><a data-scroll style="padding: 5px;" href="#start">返回开始</a></li>
+
+                              </ul>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </footer>
+
+     <div class="modal fade" id="addtype1" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document" style="top: 100px">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                   aria-hidden="true">&times;</span></button>
+                         <h4 class="modal-title">新增疫苗本</h4>
+                    </div>
+                    <div class="modal-body row" style="margin:20px">
+                         <div class="form-group container col-sm-12 col-md-12">
+                              <label class="control-label">疫苗本名称</label>
+                              <!-- 样式1 -->
+                              <input type="text" class="form-control monster-number" style="display: inline;"
+                                   id="add-location-name">
+                         </div>
+                         <div class="form-group container col-sm-12 col-md-12">
+                              <label class="control-label">详情描述</label>
+                              <!-- 样式1 -->
+                              <textarea type="text" class="form-control monster-number" style="display: inline;"
+                                   id="add-location-detail"></textarea>
+                         </div>
+                    </div>
+
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                         <button type="button" class="btn btn-primary">确定</button>
+                    </div>
+               </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+     </div><!-- /.modal -->
+
+     <div class="modal fade" id="addtype2" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document" style="top: 100px">
+               <div class="modal-content">
+                    <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                   aria-hidden="true">&times;</span></button>
+                         <h4 class="modal-title">疫苗记录</h4>
+                    </div>
+                    <div class="modal-body row" style="margin:20px">
+                         <div class="form-group container col-sm-12 col-md-12">
+                              <label class="control-label">记录名称</label>
+                              <!-- 样式1 -->
+                              <input type="text" class="form-control monster-number" style="display: inline;"
+                                   id="add-location-name">
+                         </div>
+                         <div class="form-group container col-sm-12 col-md-12">
+                              <label class="control-label">详情描述</label>
+                              <!-- 样式1 -->
+                              <textarea type="text" class="form-control monster-number" style="display: inline;"
+                                   id="add-location-detail"></textarea>
+                         </div>
+                    </div>
+
+                    <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                         <button type="button" class="btn btn-primary">确定</button>
+                    </div>
+               </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+     </div><!-- /.modal -->
+
+     <!-- SCRIPTS -->
+     <script src="../js/jquery.js"></script>
+     <script src="../js/bootstrap.min.js"></script>
+     <script src="../js/jquery.stellar.min.js"></script>
+     <script src="../js/owl.carousel.min.js"></script>
+     <script src="../js/smoothscroll.js"></script>
+     <script src="../js/custom.js"></script>
+
+</body>
+
+</html>
