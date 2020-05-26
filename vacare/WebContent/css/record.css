@@ -1,0 +1,98 @@
+
+  /*---------------------------------------
+     block          
+  -----------------------------------------*/
+
+  .block{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);   
+  }
+
+  .block-body {
+    padding: 15px;
+    font-weight: bolder;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .block-body.active{
+    padding: 15px;
+    color: #fff;
+    font-weight: bolder;
+    background-color: #29ca8e;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .nav .block-body:hover {
+    padding: 15px;
+    color: #29ca8e;
+    font-weight: bolder;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .add .block-body:hover {
+    padding: 15px;
+    color: #29ca8e;
+    font-weight: bolder;
+    background-color: #fff;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .vaccine-record {
+    padding: 30px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .vaccine-record:hover {
+    padding: 30px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    border: 1px solid #29ca8e;
+  }
+
+  .vaccine-image {
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.05);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .record-icons{
+      float: right;
+  }
+
+  .record-icon:hover{
+    color:#29ca8e;
+}
+
+  .element{
+    padding: 15px;
+  }
+
+  .vaccine-future {
+    padding: 15px;
+    border-bottom: 1px solid rgba(0,0,0,.05);
+  }
+
+  .vaccine-recommend{
+    padding: 10px;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+
+  .unrecorded{
+    width: 200px; 
+    margin: 120px auto;
+  }
+
+  .fa-icon{
+    margin:10px auto;
+    font-size: 22px;
+  }
+  
+  .layui-form-label{
+  	width:100px
+  }
+  
+ 

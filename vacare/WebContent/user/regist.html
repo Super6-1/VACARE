@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+  	<!-- Facebook and Twitter integration -->
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+     <link rel="stylesheet" href="../css/owl.carousel.css">
+     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+     <link rel="stylesheet" href="../css/font-awesome.min.css">
+
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="../css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="../css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="../css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="../css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="../css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="../css/owl.carousel.min.css">
+	<link rel="stylesheet" href="../css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="../css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="../js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+<script language="javascript">
+function checkvalid()
+{
+var strmg=register.username.value;
+var pass1=register.password.value;
+var pass2=register.password2.value;
+
+if(strmg=="" ||  pass1=="" || pass2=="")
+{
+alert("用户名或密码为空！请输入用户名和密码...");
+//login.pwd.value=" ";
+//return false;
+return false;
+}
+else if(pass1!=pass2)
+{
+alert("两次输入密码不同！请重新输入...");
+//login.pwd.value=" ";
+return false;
+}
+else 
+return true;
+}
+
+function checkvalid2()
+{
+var strmg=login.username.value;
+var pass=login.password.value;
+if(strmg=="" ||  pass=="")
+{
+alert("用户名或密码为空,请输入用户名和密码...");
+//login.pwd.value=" ";
+return false;
+}
+else
+return true;
+}
+</script>
+
+	</head>
+	<body>
+		
+	<div class="gtco-loader"></div>
+	
+	<div id="page">
+
+	
+	<div class="page-inner">
+	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
+
+			 <div class="navbar-header">
+
+				  <!-- lOGO TEXT HERE -->
+				  <a href="index.html" class="navbar-brand">VACARE</a>
+			 </div>
+
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="index.html" class="smoothScroll">首页</a></li>
+					   <li><a href="#" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="#" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="#" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="#" class="smoothScroll">接种信息</a></li>
+					   <li><a href="recordlist.html" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="#" data-toggle="dropdown"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								<li><a class="dropdown-item" href="regist.html"><i
+												class="fa fa-sign-in fa-lg"></i> &nbsp;注册&登录</a></li>
+								 <li><a class="dropdown-item" href="Manager_Changepwd.html"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="Manager_Changepwd.html"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href="../index.html"><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+				  </ul>
+			 </div>
+		</div>
+   </section>
+	
+	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/home_bg.jpg)">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-left">
+					
+
+					<div class="row row-mt-15em">
+						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							
+							<h1>Welcome to VACARE!</h1>	
+						</div>
+						<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+							<div class="form-wrap">
+								<div class="tab">
+									<ul class="tab-menu">
+										<li class="active gtco-first"><a href="#" data-tab="signup">Sign up</a></li>
+										<li class="gtco-second"><a href="#" data-tab="login">Login</a></li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-content-inner active" data-content="signup">
+											<form name="register" action="regist.jsp" method="post" id="register">
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="username">Email</label>
+														<input type="text" class="form-control" id="username" name="username">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Password</label>
+														<input type="password" class="form-control" id="password" name="password">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password2">Repeat Password</label>
+														<input type="password" class="form-control" id="password2" name="password2">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Sign up" onClick="return checkvalid()">
+													</div>
+												</div>
+											</form>	
+										</div>
+
+										<div class="tab-content-inner" data-content="login">
+											<form  name="login" action="login.jsp" method="post" >
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="username">Email</label>
+														<input type="text" class="form-control" id="username" name="username">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Password</label>
+														<input type="password" class="form-control" id="password" name="password">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Login" onClick="return checkvalid2()">
+													</div>
+												</div>
+											</form>	
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+							
+					
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	</div>
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	<!-- FOOTER -->
+	<footer id="footer">
+		<div class="container">
+			 <div class="row">
+				  <div class="copyright-text col-md-12 col-sm-12">
+					   <div class="col-md-6 col-sm-6">
+							<p>Copyright &copy; 2020 VACARE - for all</p>
+					   </div>
+					   <div class="col-md-6 col-sm-6">
+							<ul class="social-icon">
+								 <li><a data-scroll style="padding: 5px;" href="#start">返回开始</a></li>
+
+							</ul>
+					   </div>
+				  </div>
+			 </div>
+		</div>
+   </footer>
+	
+	<!-- jQuery -->
+	<script src="../js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="../js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="../js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="../js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="../js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="../js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="../js/main.js"></script>
+
+	</body>
+</html>
+
