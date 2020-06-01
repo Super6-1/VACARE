@@ -141,10 +141,6 @@
                               </div>
                               <div class="element">
                                    <div class="row" style="margin-bottom: 10px;font-size: 16px;">
-                                        <div class="col-md-2">
-                                             <label>性别:</label>
-                                             <span id="gender" style="text-decoration: underline;"></span>
-                                        </div>
                                         <div class="col-md-6">
                                              <label>开始日期:</label>
                                              <span id="startDate" style="text-decoration: underline;"></span>
@@ -180,7 +176,7 @@
                               <div class="element">
                                    <div class="page-header" style="margin-bottom: 0px;">
                                         <h3>计划接种</h3>
-                                        <i class="fa fa-plus"
+                                        <i class="record-icon fa fa-plus"
                                              style="font-size: 24px;float: right;margin-top: -30px;"></i>
                                    </div>
                                    <div id="future">
@@ -237,7 +233,7 @@
                <div class="layui-form-item" style="border-bottom:1px solid rgba(0,0,0,.1); padding-bottom:10px">
                     <div class="layui-inline">
                          <label class="layui-form-label">验证日期</label>
-                         <div class="layui-input-inline">
+                         <div class="layui-input-block">
                               <input type="text" name="date" id="verify-Date" lay-verify="date" placeholder="yyyy-MM-dd"
                                    class="layui-input">
                          </div>
@@ -247,16 +243,6 @@
                <div class="layui-form-item">
                     <div class="layui-inline">
       					<label class="layui-form-label">疫苗批号</label>
-      					<div class="layui-input-block">
-                         <input type="text" name="batchnum" autocomplete="off"
-                              class="layui-input" style="width:250px">
-                    	</div>
-                    </div>
-               </div>
-               <label style="color:#7a7374; padding:5px auto;margin-left:15px; width:300px">（选填）</label>
-               <div class="layui-form-item">
-                    <div class="layui-inline">
-      					<label class="layui-form-label">确认批号</label>
       					<div class="layui-input-block">
                          <input type="text" name="batchnum" autocomplete="off"
                               class="layui-input" style="width:250px">
@@ -374,8 +360,6 @@
                          console.log(data);
                          var startDate = document.getElementById("startDate");
                          startDate.innerHTML = data[0]['date'];
-                         var gender = document.getElementById("gender");
-                         gender.innerHTML = data[0]['gender'];
                     }, error: function (data) {
                     }
                });
@@ -549,11 +533,32 @@
           });
      </script>
 
+	<script>
+    	$('body').on('click', '.record-icon.fa-plus', function () {
+            //弹出即全屏
+            var note_id = document.URL.split('=')[1].split('&')[0];
+            var note_name = decodeURI(document.URL.split('=')[2]);
+            var index = layer.open({
+              type: 2,
+              content: "<%=basePath%>record/rec.jsp?Node_id=" + note_id + "&Note_name=" + note_name,
+              area: ['320px', '195px'],
+              cancel: function(index, layero){ 
+            	    layer.close(index);
+            	}  ,
+              end:function(index, layero){ 
+            	layer.msg("添加成功");
+        	    updateData(note_id);
+        	} 
+            });
+            layer.full(index);	
+    	});
+	</script>
+
+
      <script>
      	  layui.use('form', function(){
     	  	var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
     	  	form.render();
-    	  
      	  });    
           layui.use('layer', function () { //独立版的layer无需执行这一句
                var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
@@ -577,6 +582,13 @@
                }, function () {
                     layer.close(checktips);
                });
+               
+               $(".record-icon.fa-plus").hover(function () {
+                   var plus = $(this);
+                   openPlusMsg(plus);
+               }, function () {
+                   layer.close(plustips);
+               });
 
                function openCheckMsg(check) {
                     checktips = layer.tips('已完成', check, { tips: 1 });
@@ -587,6 +599,10 @@
                function openCalMsg(cal) {
                     caltips = layer.tips('修改时间', cal, { tips: 1 });
                }
+                function openPlusMsg(plus) {
+                    plustips = layer.tips('增加计划接种疫苗', plus, { tips: 1 });
+                }
+               
           });
 
      </script>

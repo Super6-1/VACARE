@@ -142,6 +142,10 @@
       								<label class="layui-form-label" style="width:120px">开始日期：</label>
         							<div id="startDate" style="height: 38px; line-height: 38px; cursor: pointer; border-bottom: 1px solid #e2e2e2; display: inline;"></div>
     							</div>
+    							<div class="col-md-6">
+    							    <div class="record-icons" style="font-size: 28px; margin-top: -5px;">
+                                    	<i class="record-icon fa fa-plus" style="padding-left:15px"></i>
+                            		</div>
                             </div>
                             <table id="DetailTable" class="table table-hover table-striped table-bordered">
                                 <thead>
@@ -175,12 +179,6 @@
                                 </script>
                             </table>
                         </div>
-                        <!--
-                        <div class="element">
-                            <div style="font-size: 24px;margin-top: -30px;float: right;">
-                                <i class="record-icon fa fa-plus" style="padding-left:15px"></i>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -205,6 +203,29 @@
             </div>
         </div>
     </footer>
+    
+        <div id="add-hiddenarea" style="margin:20px">
+    	<form class="layui-form" action="" lay-filter="add-form">
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+      					<label class="layui-form-label">疫苗本名称</label>
+      					<div class="layui-input-block">
+                         <input type="text" name="note-name" id="note-name" autocomplete="off" placeholder="请输入名称,不超过14个字"
+                              class="layui-input" style="width:270px">
+                    	</div>
+                    </div>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+                         <label class="layui-form-label">开始日期</label>
+                         <div class="layui-input-block">
+                               <div class="layui-inline" id="addDate" ></div>
+                         </div>
+                         <div class="hidden" id="datevalue"></div>
+                    </div>
+               </div>
+          </form>
+    </div>
 
     <!-- SCRIPTS -->
     <script src="../js/jquery.js"></script>
@@ -238,19 +259,10 @@
             }
         });
     </script>
+    
     <script type="text/javascript">
-        $(document).ready(function () {
-
-            var url = window.location.href;
-            var Note_id = url.split('=')[1].split('&')[0];
-            var Note_name = decodeURI(url.split('=')[2]);
-            
-            var title = document.getElementById("note-title");
-            title.innerHTML = Note_name;
-            var liname = document.getElementById("note-li");
-            liname.innerHTML = Note_name;
-            
-            $.ajax({
+    	function updateData(Note_id){
+    		$.ajax({
                 url: "<%=basePath%>QueryModelDetails",
                 type: "post",
                 data: {
@@ -269,12 +281,26 @@
                 }, error: function (data) {
                 }
             });
+    	}	
+    
+        $(document).ready(function () {
+
+            var url = window.location.href;
+            var Note_id = url.split('=')[1].split('&')[0];
+            var Note_name = decodeURI(url.split('=')[2]);
+
+            var title = document.getElementById("note-title");
+            title.innerHTML = Note_name;
+            var liname = document.getElementById("note-li");
+            liname.innerHTML = Note_name;
+
             
-            
+            updateData(Note_id);     
+            $('#add-hiddenarea').hide();
         })
     </script>
     
-    <script>
+    <script type="text/javascript">
     layui.use('laydate', function(){
     	  var laydate = layui.laydate;
           var url = window.location.href;
@@ -283,31 +309,107 @@
     	  laydate.render({
       		elem: '#startDate'
       		,trigger: 'click' //采用click弹出
-      		,value: new Date() //参数即为：2018-08-20 20:08:08 的时间戳
+      		,value: new Date() 
       		,done: function(value, date, endDate){
-      			$.ajax({
-                    url: "<%=basePath%>QueryModelDetails",
-                    type: "post",
-                    data: {
-                        Note_id: Note_id,
-                    },
-                    async: false,
-                    success: function (data) {
-                        console.log(data);
-                        for(i = 0; i < data.length; i++){
-                        	var tmp = new Date(value);
-                        	tmp.setDate(tmp.getDate() + data[i]['internal']);
-                        	data[i]['internal'] = tmp.getFullYear() + "-" + (tmp.getMonth() + 1) + "-" + tmp.getDate();
-                        }
-                        $("#tbody").empty();
-                        $("#tbody").append(template("tbody-script", { data: data }));
-                    }, error: function (data) {
-                    }
-                });
+      			updateData(Note_id);   
       		  }
           });
+    	  
+    	  
     });
+    
     </script>
+    
+    <script type="text/javascript">
+    $('body').on('click', '.record-icon.fa-plus', function () {
+    	var url = window.location.href;
+        var Note_id = url.split('=')[1].split('&')[0];
+    	
+        layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+            var laydate = layui.laydate;
+            var form = layui.form;
+            var date = $('#startDate').text();
+            
+            var datevalue = document.getElementById("datevalue");
+            datevalue.innerHTML = date;
+            
+            $('#addDate').empty();
+            laydate.render({
+                 elem: '#addDate'
+                 , position: 'static'
+                 , value: date
+                 , showBottom: false
+                 , change: function (value, date, endDate) {
+                      datevalue = document.getElementById('datevalue');
+                      datevalue.innerHTML = value;
+                 }
+            });
+            
+            layer.open({
+                type: 1,
+                title: '新增疫苗本',
+                content: $('#add-hiddenarea'),
+                area: '500px',
+                btnAlign: 'r',
+                btn: ['确定', '取消'],
+                resize: false,
+                yes: function (index, layero) {
+                	var name = document.getElementById("note-name").value;
+                	if (name.length <= 14 && name.length > 0) {
+                        $.ajax({
+                            url: "<%=basePath%>AddNoteType1WithData",
+                            type: "post",
+                            data: {
+                                Note_id: Note_id,
+                                name:name,
+                                date: $('#datevalue').text(),
+                                pic: "",
+                            },
+                            async: false,
+                            success: function (data) {
+                            	console.log(data);
+                            	 var url = "type1.jsp?Note_id=" + data + "&Note_name=" + name;
+                                 window.location.href = url;
+                            }, error: function (data) {
+                            }
+                        });
+                        layer.close(index);
+                    }
+                    else {
+                        layer.msg("请按要求输入！");
+                    }
+                },
+                btn2: function (index, layero) {
+                     layer.close(index);
+                },
+                cancel: function (index, layero) {
+                     layer.close(index);
+                }
+           });
+      });
+        return false;
+    })
+
+
+     layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+            $(".record-icon.fa-plus").hover(function () {
+                var plus = $(this);
+                openPlusMsg(plus);
+            }, function () {
+                layer.close(plustips);
+            });
+
+            function openPlusMsg(plus) {
+                plustips = layer.tips('增加疫苗本', plus, { tips: 1 });
+            }
+        });
+
+    </script>
+    
+    
 </body>
 
 </html>

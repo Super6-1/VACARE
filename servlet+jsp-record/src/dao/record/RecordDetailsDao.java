@@ -69,6 +69,13 @@ public class RecordDetailsDao {
 		    stmt.execute(sql);
 		}
 		
+		public void deleteNote(int User_id, int Note_id) throws SQLException
+		{
+			String sql  = "delete from recorddetails where User_id = "+User_id +" and Note_id = "+Note_id;
+		    System.out.println(sql);
+		    stmt.execute(sql);
+		}
+		
 		public void updateDate(int User_id, int Note_id, int RecordDetails_id, String date) throws SQLException
 		{
 			String sql  = "update recorddetails set RD_Date = '"+ date +"' where User_id = "+ User_id +" and Note_id = "+ Note_id + " and RecordDetails_id = "+ RecordDetails_id;
@@ -81,5 +88,25 @@ public class RecordDetailsDao {
 			String sql  = "update recorddetails set RD_Date = '"+ date +"', RD_Batch = '"+ batch +"', RD_Site = '"+ site +"', RD_Place = '"+ place +"', RD_State = 1 where User_id = "+ User_id +" and Note_id = "+ Note_id + " and RecordDetails_id = "+ RecordDetails_id;
 		    System.out.println(sql);
 		    stmt.execute(sql);
+		}
+		
+		public void addRecordDetails(int User_id, int Note_id, int RecordDetails_id,String name, int dose, String date, String batch, int state, String site, String place, String remark) throws SQLException
+		{
+			String sql  = "insert into recorddetails values("+User_id+","+Note_id+","+RecordDetails_id+",'"+name+"',"+dose+",'"+date+"','"+batch+"',"+state+",'"+site+"','"+place+"','"+remark+"')";
+			System.out.println(sql);
+		    stmt.execute(sql);
+		}
+		
+		public int getAllNum(int User_id, int Note_id) throws SQLException
+		{
+			String sql  = "select count(RecordDetails_id) from recorddetails where User_id = " + User_id+" and Note_id = " + Note_id;
+		    System.out.println(sql);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    if(rs.next())
+			{
+		    	int num = rs.getInt(1);
+		    	return num;
+			}
+		    return 0;
 		}
 	}

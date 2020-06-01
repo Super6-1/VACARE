@@ -16,13 +16,14 @@ import javax.servlet.http.*;
 import com.alibaba.fastjson.JSONArray;
 
 import dao.record.NoteDao;
+import dao.record.RecordDetailsDao;
 
 // ¿©’π HttpServlet ¿‡
 @WebServlet (name = "CutNote", urlPatterns = {"/CutNote"})
 public class CutNote extends HttpServlet {
  
   private NoteDao dao = new NoteDao();
-
+  private RecordDetailsDao RDdao = new RecordDetailsDao();
 
   public void doGet(HttpServletRequest request,
                     HttpServletResponse response)
@@ -42,7 +43,8 @@ public class CutNote extends HttpServlet {
       		//Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
-			dao.delete(1, Note_id);
+			RDdao.deleteNote(1, Note_id);
+      		dao.delete(1, Note_id);
 			
 			
 		} catch (SQLException e) {

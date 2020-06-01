@@ -20,6 +20,7 @@
     <meta name="team" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
+    <link rel="stylesheet" href="../plugins/layui/css/layui.css">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/owl.carousel.css">
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
@@ -159,7 +160,29 @@
             </div>
         </div>
     </footer>
-
+    
+        <div id="add-hiddenarea" style="margin:20px">
+    	<form class="layui-form" action="" lay-filter="add-form">
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+      					<label class="layui-form-label">疫苗本名称</label>
+      					<div class="layui-input-block">
+                         <input type="text" name="note-name" id="note-name" autocomplete="off" placeholder="请输入名称,不超过14个字"
+                              class="layui-input" style="width:270px">
+                    	</div>
+                    </div>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+                         <label class="layui-form-label">开始日期</label>
+                         <div class="layui-input-block">
+                               <div class="layui-inline" id="addDate" ></div>
+                         </div>
+                         <div class="hidden" id="datevalue"></div>
+                    </div>
+               </div>
+          </form>
+    </div>
     <!-- SCRIPTS -->
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -168,7 +191,7 @@
     <script src="../js/smoothscroll.js"></script>
     <script src="../js/custom.js"></script>
 	<script src="../js/template.js"></script>
-
+    <script src="../plugins/layui/layui.js"></script>
     <script>
         $(document).ready(function () {
             $.ajax({
@@ -182,6 +205,7 @@
                 }, error: function (data) {
                 }
             });
+            $('#add-hiddenarea').hide();
         });
         
          $('body').on('click', '.record-model', function () {
@@ -192,6 +216,89 @@
             window.location.href = url; 
          });
 
+         $('body').on('click', '.record-icon.fa-plus', function () {
+            var Note_id = $(this).parent().parent().children(".note-id").text();
+         	
+             layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
+                 var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+                 var laydate = layui.laydate;
+                 var form = layui.form;
+                 var date = new Date();
+                 var nowDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+                 var datevalue = document.getElementById("datevalue");
+                 datevalue.innerHTML = nowDate;
+                 
+                 $('#addDate').empty();
+                 laydate.render({
+                      elem: '#addDate'
+                      , position: 'static'
+                      , value: date
+                      , showBottom: false
+                      , change: function (value, date, endDate) {
+                           datevalue = document.getElementById('datevalue');
+                           datevalue.innerHTML = value;
+                      }
+                 });
+                 
+                 layer.open({
+                     type: 1,
+                     title: '新增疫苗本',
+                     content: $('#add-hiddenarea'),
+                     area: '500px',
+                     btnAlign: 'r',
+                     btn: ['确定', '取消'],
+                     resize: false,
+                     yes: function (index, layero) {
+                     	var name = document.getElementById("note-name").value;
+                     	if (name.length <= 14 && name.length > 0) {
+                             $.ajax({
+                                 url: "<%=basePath%>AddNoteType1WithData",
+                                 type: "post",
+                                 data: {
+                                     Note_id: Note_id,
+                                     name:name,
+                                     date: $('#datevalue').text(),
+                                     pic: "",
+                                 },
+                                 async: false,
+                                 success: function (data) {
+                                 	console.log(data);
+                                 	 var url = "type1.jsp?Note_id=" + data + "&Note_name=" + name;
+                                      window.location.href = url;
+                                 }, error: function (data) {
+                                 }
+                             });
+                             layer.close(index);
+                         }
+                         else {
+                             layer.msg("请按要求输入！");
+                         }
+                     },
+                     btn2: function (index, layero) {
+                          layer.close(index);
+                     },
+                     cancel: function (index, layero) {
+                          layer.close(index);
+                     }
+                });
+           });
+             return false;
+         })
+
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+
+            $(".record-icon.fa-plus").hover(function () {
+                var plus = $(this);
+                openPlusMsg(plus);
+            }, function () {
+                layer.close(plustips);
+            });
+
+            function openPlusMsg(plus) {
+                plustips = layer.tips('增加疫苗本', plus, { tips: 1 });
+            }
+        });
         
     </script>
 </body>

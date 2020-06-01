@@ -41,7 +41,7 @@ public class NoteDao {
 			List<note> Note = new ArrayList<>();
 			while(rs.next())
 			{
-				note n = new note(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getInt(7));
+				note n = new note(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5),  rs.getInt(6));
 				Note.add(n);		
 			}
 			return Note;
@@ -55,15 +55,22 @@ public class NoteDao {
 			List<note> Note = new ArrayList<>();
 			while(rs.next())
 			{
-				note n = new note(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getInt(7));
+				note n = new note(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getInt(6));
 				Note.add(n);		
 			}
 			return Note;
 		}
 		
-		public void add(int User_id, String name, String pic, String text,Date date, String gender, int type) throws SQLException
+		public void addType1(int User_id, int Note_id, String name, String pic, String date) throws SQLException
 		{
-			String sql  = "insert into note values("+User_id+",default,'"+name+"','"+pic+"','"+date+"','"+gender+"','"+type+"')";
+			String sql  = "insert into note values("+User_id+","+Note_id +",'"+name+"','"+pic+"','"+date+"',"+1+")";
+			System.out.println(sql);
+	     	stmt.execute(sql);
+		}
+		
+		public void addType2(int User_id, int Note_id, String name, String pic, String text, String date) throws SQLException
+		{
+			String sql  = "insert into note values("+User_id+","+Note_id +",'"+name+"','"+pic+"','"+date+"',"+2+")";
 			System.out.println(sql);
 	     	stmt.execute(sql);
 		}
@@ -80,6 +87,19 @@ public class NoteDao {
 			String sql  = "update note set N_Name = '"+ name +"' where User_id = "+User_id +" and Note_id = "+Note_id;
 		    System.out.println(sql);
 		    stmt.execute(sql);
+		}
+		
+		public int getAllNum(int User_id) throws SQLException
+		{
+			String sql  = "select count(Note_id) from note where User_id = " + User_id;
+		    System.out.println(sql);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    if(rs.next())
+			{
+		    	int num = rs.getInt(1);
+		    	return num;
+			}
+		    return 0;
 		}
 		
 	}

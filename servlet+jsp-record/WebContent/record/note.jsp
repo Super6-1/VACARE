@@ -203,55 +203,49 @@
         </div>
     </footer>
 
-     <div class="modal fade" id="addtype1" tabindex="-1" role="dialog">
-          <div class="modal-dialog" role="document" style="top: 100px">
-               <div class="modal-content">
-                    <div class="modal-header">
-                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                   aria-hidden="true">&times;</span></button>
-                         <h4 class="modal-title">新增疫苗本</h4>
-                    </div>
-                    <div class="modal-body row" style="margin:20px">
-                         <div class="form-group container col-sm-12 col-md-12">
-                              <label class="control-label">疫苗本名称</label>
-                              <!-- 样式1 -->
-                              <input type="text" name="add-general-vaccine-name" class="form-control monster-number"
-                                   style="display: inline;" id="add-location-name">
-                         </div>
-                         <div class="form-group container col-sm-12 col-md-12">
-                              <label class="control-label">疫苗本归属人性别</label>
-                              <div class="layui-input-block">
-                                   <label><input name="add-general-vaccine-sex" type="radio" value=""
-                                             id="add-location-sex" value="男" />男 </label>
-                                   <label><input name="add-general-vaccine-sex" type="radio" value=""
-                                             id="add-location-sex" value="女" />女 </label>
-                              </div>
-                         </div>
-                         <div class="form-group container col-sm-12 col-md-12">
-                              <label class="control-label">第一针接种日期(宝宝疫苗本为宝宝出生日期)</label>
-                              <div class="layui-input-inline">
-                                   <input type="date" name="add-general-vaccine-date" id="add-location-date" />
-                              </div>
-                         </div>
-                         <div class="form-group container col-sm-12 col-md-12">
-                              <label class="control-label">添加照片进行记录</label>
-                              <form method="post" enctype="multipart/form-data" id="file_upload">
-                                   　　 <input type="file" id="test-image-file" name="test"
-                                        accept="image/gif, image/jpeg, image/png, image/jpg"
-                                        name="add-general-vaccine-picture">
-                                   　 <img src="" height="200" alt="Image preview area..." title="preview-img"
-                                        id="add-location-picture">
-                              </form>
+    <div id="add-hiddenarea" style="margin:20px">
+    	<form class="layui-form" action="" lay-filter="add-form" style="border-bottom:1px solid rgba(0,0,0,.1); padding-bottom:10px; margin-bottom:20px">
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+                         <label class="layui-form-label">选择日期</label>
+                         <div class="layui-input-block">
+                              <input type="text" name="addDate" id="addDate" lay-verify="date" placeholder="yyyy-MM-dd"
+                                   class="layui-input" style="width:250px">
                          </div>
                     </div>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+      					<label class="layui-form-label">疫苗名称</label>
+      					<div class="layui-input-block">
+                         <input type="text" name="vaccine-name" autocomplete="off" placeholder="请输入名称"
+                              class="layui-input" style="width:400px">
+                    	</div>
+                    </div>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+      					<label class="layui-form-label">记录内容</label>
+      					<div class="layui-input-block">
+                         <textarea placeholder="请输入内容" id="record-text" class="layui-textarea" style="width:400px"></textarea>
+                    	</div>
+                    </div>
+               </div>
+          </form>
+        <div class="layui-upload">
+        	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            	<legend>选择图片</legend>
+        	</fieldset>
+        	<div class="layui-upload-drag" id="#uploadPhoto" style="margin-left:50px">
+            	<i class="layui-icon"></i>
+            	<p>点击上传，或将文件拖拽到此处</p>
+            	<div class="layui-hide" id="uploadView">
+                	<hr>
+                	<img src="" alt="上传成功后渲染" style="max-width: 196px">
+            	</div>
+        	</div>
+        </div>
 
-                    <div class="modal-footer">
-                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                         <button type="button" class="btn btn-primary">确定</button>
-                    </div>
-               </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
-     </div><!-- /.modal -->
 
     <div class="modal fade" id="addtype2" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document" style="top: 100px">
@@ -283,7 +277,18 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
+    
+    <div id="changePic">
+    	<div class="layui-upload-drag" style="margin:20px" id="choosePicView">
+  			<i class="layui-icon"></i>
+  			<p>点击上传，或将文件拖拽到此处</p>
+  			<div id="uploadView">
+    			<hr>
+    			<img src="" alt="图片预览" style="max-width: 100px;max-height:100px">
+  			</div>
+    	</div>
+	</div>
+	
     <!-- SCRIPTS -->
     <script src="../js/jquery.js"></script>
     <script src="../js/bootstrap.min.js"></script>
@@ -310,6 +315,7 @@
 
         $(document).ready(function () {
             updateData();
+            $('#changePic').hide();
         })
 
         $('body').on('click', '.record-details', function () {
@@ -419,42 +425,54 @@
             return false;
         })
         
-        $('body').on('click', '.record-icon.fa-tag', function () {
+        $('body').on('click', '.record-icon.fa-photo', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             var note_name = $(this).parent().parent().children(".note-name").text();
-            layui.use('layer', function () { //独立版的layer无需执行这一句
+            layui.use(['layer','upload'], function () { //独立版的layer无需执行这一句
                 var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+                var upload = layui.upload;
+                var date = new Date();
+                var id = date.getTime();
+                
+                layui.$('#uploadDemoView').addClass('layui-hide');
+                upload.render({
+                    elem: '#choosePicView'
+                    ,url:  "<%=basePath%>UploadImage" //改成您自己的上传接口
+                    ,done: function(res){
+                      layer.msg('上传成功');
+                      $('#changePic #uploadView').removeClass('layui-hide').find('img').attr('src', "../../"+res.data.src);
+                      console.log(res);
+                    }
+                  });
 
-                layer.prompt({
-                    formType: 0,
-                    value: note_name,
-                    title: '请输入名称(不超过14个中文字符)',
-                }, function (value, index, elem) {
-                    if (value.length <= 14) {
-                        $.ajax({
-                            url: "<%=basePath%>UpdateNoteName",
-                            type: "post",
-                            data: {
-                                Note_id: note_id,
-                                name: value,
-                            },
-                            async: false,
-                            success: function (data) {
-                                updateData();
-                            }, error: function (data) {
-                            }
-                        });
-                        layer.close(index);
-                    }
-                    else {
-                        layer.msg("请按要求输入！");
-                    }
+                     layer.open({
+                          type: 1,
+                          title: '修改封面',
+                          content: $('#changePic'),
+                          area: '300px',
+                          btnAlign: 'r',
+                          btn: ['确定', '取消'],
+                          resize: false,
+                          yes: function (index, layero) {
+                        
+                               layer.close(index);
+                          },
+                          btn2: function (index, layero) {
+                               layer.close(index);
+                          },
+                          cancel: function (index, layero) {
+                               layer.close(index);
+                          }
+                     });
                 });
-            });
-            return false;
-        })
+                return false;
+           })
+
     </script>
 
+	<script type="text/javascript">
+		
+	</script>
 </body>
 
 </html>

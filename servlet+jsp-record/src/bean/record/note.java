@@ -8,16 +8,14 @@ public class note {
 	private String Name;
 	private String Pic;
 	private Date Date;
-	private String Gender;
 	private int Type;
 
-	public note(int User_id, int Note_id, String Name, String Pic, Date Date, String Gender, int Type) {
+	public note(int User_id, int Note_id, String Name, String Pic, Date Date, int Type) {
 		this.User_id = User_id;
 		this.Note_id = Note_id;
 		this.Name = Name;
 		this.Pic = Pic;
 		this.Date = Date;
-		this.Gender = Gender;
 		this.Type = Type;
 	}
 	public int getNote_id() {
@@ -50,12 +48,6 @@ public class note {
 	}
 	public void setDate(Date date) {
 		Date = date;
-	}
-	public String getGender() {
-		return Gender;
-	}
-	public void setGender(String gender) {
-		Gender = gender;
 	}
 	public int getType() {
 		return Type;
