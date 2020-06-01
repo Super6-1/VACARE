@@ -1,0 +1,45 @@
+<web-app>      
+    <servlet>
+        <servlet-name>queryAllname</servlet-name>
+        <servlet-class>servlet.queryAllname</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>queryAllfrom</servlet-name>
+        <servlet-class>servlet.queryAllfrom</servlet-class>
+    </servlet>    
+    <servlet>
+        <servlet-name>queryAllprov</servlet-name>
+        <servlet-class>servlet.queryAllprov</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>queryProv</servlet-name>
+        <servlet-class>servlet.selectprov</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>queryFrom</servlet-name>
+        <servlet-class>servlet.selectfrom</servlet-class>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>queryAllname</servlet-name>
+        <url-pattern>/queryAllname</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryAllfrom</servlet-name>
+        <url-pattern>/queryAllfrom</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryAllprov</servlet-name>
+        <url-pattern>/queryAllprov</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryProv</servlet-name>
+        <url-pattern>/queryProv</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>queryFrom</servlet-name>
+        <url-pattern>/queryFrom</url-pattern>
+    </servlet-mapping>
+    
+</web-app>  
