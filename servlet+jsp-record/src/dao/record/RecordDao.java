@@ -47,6 +47,13 @@ public class RecordDao {
 			return R;
 		}
 		
+		public void addRecord(int User_id, int Note_id, int Record_id,String name, String date, String text, String pic1, String pic2, String pic3, String pic4) throws SQLException
+		{
+			String sql  = "insert into record values("+User_id+","+Note_id+","+Record_id+",'"+name+"','"+date+"','"+text+"','"+pic1+"','"+pic2+"','"+pic3+"','"+pic4+"')";
+			System.out.println(sql);
+		    stmt.execute(sql);
+		}
+		
 		public void delete(int User_id, int Note_id, int Record_id) throws SQLException
 		{
 			String sql  = "delete from record where User_id = "+ User_id +" and Note_id = "+Note_id + " and Record_id = "+ Record_id;
@@ -59,5 +66,18 @@ public class RecordDao {
 			String sql  = "update record set R_Text = '"+ text +"' where User_id = "+ User_id +" and Note_id = "+ Note_id + " and Record_id = "+ Record_id;
 		    System.out.println(sql);
 		    stmt.execute(sql);
+		}
+		
+		public int getAllNum(int User_id, int Note_id) throws SQLException
+		{
+			String sql  = "select count(Record_id) from record where User_id = " + User_id+" and Note_id = " + Note_id;
+		    System.out.println(sql);
+		    ResultSet rs = stmt.executeQuery(sql);
+		    if(rs.next())
+			{
+		    	int num = rs.getInt(1);
+		    	return num;
+			}
+		    return 0;
 		}
 	}

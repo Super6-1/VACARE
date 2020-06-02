@@ -68,7 +68,7 @@ public class NoteDao {
 	     	stmt.execute(sql);
 		}
 		
-		public void addType2(int User_id, int Note_id, String name, String pic, String text, String date) throws SQLException
+		public void addType2(int User_id, int Note_id, String name, String pic, String date) throws SQLException
 		{
 			String sql  = "insert into note values("+User_id+","+Note_id +",'"+name+"','"+pic+"','"+date+"',"+2+")";
 			System.out.println(sql);
@@ -89,6 +89,13 @@ public class NoteDao {
 		    stmt.execute(sql);
 		}
 		
+		public void setNotePic(int User_id, int Note_id, String pic) throws SQLException
+		{
+			String sql  = "update note set N_Pic = '"+ pic +"' where User_id = "+User_id +" and Note_id = "+Note_id;
+		    System.out.println(sql);
+		    stmt.execute(sql);
+		}
+		
 		public int getAllNum(int User_id) throws SQLException
 		{
 			String sql  = "select count(Note_id) from note where User_id = " + User_id;
@@ -101,5 +108,5 @@ public class NoteDao {
 			}
 		    return 0;
 		}
-		
+
 	}

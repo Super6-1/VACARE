@@ -116,29 +116,25 @@
                     </div>
 
                     <div class="block add">
-                        <div class="block-body">
-                            <a data-toggle="modal" data-target="#addtype1">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <i class="fa fa-plus fa-icon"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5>新增疫苗本</h5>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="block-body" id="addType1">
+                            <div class="row">
+                                 <div class="col-md-2">
+                                      <i class="fa fa-plus fa-icon"></i>
+                                 </div>
+                                 <div class="col-md-8">
+                                      <h5>新增疫苗本</h5>
+                                 </div>
+                            </div>
                         </div>
-                        <div class="block-body">
-                            <a data-toggle="modal" data-target="#addtype2">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <i class="fa fa-cloud fa-icon"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5>疫苗本记录</h5>
-                                    </div>
-                                </div>
-                            </a>
+                        <div class="block-body" id="addType2">
+                            <div class="row">
+                                 <div class="col-md-2">
+                                      <i class="fa fa-plus fa-icon"></i>
+                                 </div>
+                                 <div class="col-md-8">
+                                      <h5>新增记录本</h5>
+                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -159,8 +155,8 @@
                             <div class="vaccine-record record-details">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="vaccine-image" style="height:105px">
-                                            <img src="{{value.pic}}">
+                                        <div class="vaccine-image" style="height:105px;padding:2px;overflow:hidden">
+                                            <img src="{{value.pic}}" style="width:100%; height:100%; object-fit:cover">
                                         </div>
                                     </div>
                                     <div class="col-md-10">
@@ -203,80 +199,54 @@
         </div>
     </footer>
 
-    <div id="add-hiddenarea" style="margin:20px">
-    	<form class="layui-form" action="" lay-filter="add-form" style="border-bottom:1px solid rgba(0,0,0,.1); padding-bottom:10px; margin-bottom:20px">
+
+    <div id="addType1-hiddenarea" style="margin:20px">
+    	<form class="layui-form" action="" lay-filter="addtype1-form">
                <div class="layui-form-item">
                     <div class="layui-inline">
-                         <label class="layui-form-label">选择日期</label>
+      					<label class="layui-form-label">疫苗本名称</label>
+      					<div class="layui-input-block">
+                         <input type="text" name="noteType1-name" id="noteType1-name" autocomplete="off" placeholder="请输入名称,不超过14个字"
+                              class="layui-input" style="width:270px">
+                    	</div>
+                    </div>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+                         <label class="layui-form-label">开始日期</label>
                          <div class="layui-input-block">
-                              <input type="text" name="addDate" id="addDate" lay-verify="date" placeholder="yyyy-MM-dd"
-                                   class="layui-input" style="width:250px">
+                               <div class="layui-inline" id="addDateForType1" ></div>
                          </div>
-                    </div>
-               </div>
-               <div class="layui-form-item">
-                    <div class="layui-inline">
-      					<label class="layui-form-label">疫苗名称</label>
-      					<div class="layui-input-block">
-                         <input type="text" name="vaccine-name" autocomplete="off" placeholder="请输入名称"
-                              class="layui-input" style="width:400px">
-                    	</div>
-                    </div>
-               </div>
-               <div class="layui-form-item">
-                    <div class="layui-inline">
-      					<label class="layui-form-label">记录内容</label>
-      					<div class="layui-input-block">
-                         <textarea placeholder="请输入内容" id="record-text" class="layui-textarea" style="width:400px"></textarea>
-                    	</div>
+                         <div class="hidden" id="dateValueForType1"></div>
                     </div>
                </div>
           </form>
-        <div class="layui-upload">
-        	<fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-            	<legend>选择图片</legend>
-        	</fieldset>
-        	<div class="layui-upload-drag" id="#uploadPhoto" style="margin-left:50px">
-            	<i class="layui-icon"></i>
-            	<p>点击上传，或将文件拖拽到此处</p>
-            	<div class="layui-hide" id="uploadView">
-                	<hr>
-                	<img src="" alt="上传成功后渲染" style="max-width: 196px">
-            	</div>
-        	</div>
-        </div>
-
-
-    <div class="modal fade" id="addtype2" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document" style="top: 100px">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">疫苗记录</h4>
-                </div>
-                <div class="modal-body row" style="margin:20px">
-                    <div class="form-group container col-sm-12 col-md-12">
-                        <label class="control-label">记录名称</label>
-                        <!-- 样式1 -->
-                        <input type="text" class="form-control monster-number" style="display: inline;"
-                            id="add-location-name">
+    </div>
+    
+    
+    <div id="addType2-hiddenarea" style="margin:20px">
+   		<form class="layui-form" action="" lay-filter="addtype2-form">
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+      					<label class="layui-form-label">记录本名称</label>
+      					<div class="layui-input-block">
+                         <input type="text" name="noteType2-name" id="noteType2-name" autocomplete="off" placeholder="请输入名称,不超过14个字"
+                              class="layui-input" style="width:270px">
+                    	</div>
                     </div>
-                    <div class="form-group container col-sm-12 col-md-12">
-                        <label class="control-label">详情描述</label>
-                        <!-- 样式1 -->
-                        <textarea type="text" class="form-control monster-number" style="display: inline;"
-                            id="add-location-detail"></textarea>
+               </div>
+               <div class="layui-form-item">
+                    <div class="layui-inline">
+                         <label class="layui-form-label">开始日期</label>
+                         <div class="layui-input-block">
+                               <div class="layui-inline" id="addDateForType2"></div>
+                         </div>
+                         <div class="hidden" id="dateValueForType2"></div>
                     </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary">确定</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+               </div>
+          </form>
+    </div>
+    
     
     <div id="changePic">
     	<div class="layui-upload-drag" style="margin:20px" id="choosePicView">
@@ -284,7 +254,7 @@
   			<p>点击上传，或将文件拖拽到此处</p>
   			<div id="uploadView">
     			<hr>
-    			<img src="" alt="图片预览" style="max-width: 100px;max-height:100px">
+    			<img src="" alt="图片预览" style="width:100%; height:100%; object-fit:cover;">
   			</div>
     	</div>
 	</div>
@@ -316,6 +286,8 @@
         $(document).ready(function () {
             updateData();
             $('#changePic').hide();
+            $('#addType1-hiddenarea').hide();
+            $('#addType2-hiddenarea').hide();
         })
 
         $('body').on('click', '.record-details', function () {
@@ -390,6 +362,7 @@
             return false;
         })
 
+        
         $('body').on('click', '.record-icon.fa-tag', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             var note_name = $(this).parent().parent().children(".note-name").text();
@@ -425,6 +398,7 @@
             return false;
         })
         
+        
         $('body').on('click', '.record-icon.fa-photo', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             var note_name = $(this).parent().parent().children(".note-name").text();
@@ -454,7 +428,24 @@
                           btn: ['确定', '取消'],
                           resize: false,
                           yes: function (index, layero) {
-                        
+                        	  var picPath = $('#changePic #uploadView').removeClass('layui-hide').find('img').attr('src');
+                        	  picPath.replace("\\","/");
+
+                        	  $.ajax({
+                                  url: "<%=basePath%>UpdateNotePic",
+                                  type: "post",
+                                  data: {
+                                      Note_id: note_id,
+                                      pic: picPath,
+                                  },
+                                  async: false,
+                                  success: function (data) {
+                                      updateData();
+                                      $('#changePic #uploadView').find('img').removeAttr('src');
+                                  }, error: function (data) {
+                                  }
+                              });
+                              
                                layer.close(index);
                           },
                           btn2: function (index, layero) {
@@ -468,10 +459,138 @@
                 return false;
            })
 
+        
     </script>
 
-	<script type="text/javascript">
-		
+	<script>
+		$("#addType1").click(function(){	
+	        layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
+	            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+	            var laydate = layui.laydate;
+	            var form = layui.form;
+	            var date = new Date();
+                var nowDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+	            var datevalue = document.getElementById('dateValueForType1');
+                datevalue.innerHTML = nowDate;
+	            
+	            $('#addDateForType1').empty();
+	            laydate.render({
+	                 elem: '#addDateForType1'
+	                 , position: 'static'
+	                 , value: new Date()
+	                 , showBottom: false
+	                 , change: function (value, date, endDate) {
+	                      var datevalue = document.getElementById('dateValueForType1');
+	                      datevalue.innerHTML = value;
+	                 }
+	            });
+	            
+	            layer.open({
+	                type: 1,
+	                title: '新增疫苗本',
+	                content: $('#addType1-hiddenarea'),
+	                area: '500px',
+	                btnAlign: 'r',
+	                btn: ['确定', '取消'],
+	                resize: false,
+	                yes: function (index, layero) {
+	                	var name = document.getElementById("noteType1-name").value;
+	                	if (name.length <= 14 && name.length > 0) {
+	                        $.ajax({
+	                            url: "<%=basePath%>AddNoteType1",
+	                            type: "post",
+	                            data: {
+	                                name:name,
+	                                date: $('#dateValueForType1').text()
+	                            },
+	                            async: false,
+	                            success: function (data) {
+	                                 updateData();
+	                            }, error: function (data) {
+	                            }
+	                        });
+	                        layer.close(index);
+	                    }
+	                    else {
+	                        layer.msg("请按要求输入！");
+	                    }
+	                },
+	                btn2: function (index, layero) {
+	                     layer.close(index);
+	                },
+	                cancel: function (index, layero) {
+	                     layer.close(index);
+	                }
+	            });
+	        });
+	        return false;    
+    	});
+	  
+    
+		$("#addType2").click(function(){	
+	        layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
+	            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+	            var laydate = layui.laydate;
+	            var form = layui.form;
+	            var date = new Date();
+                var nowDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+	            var datevalue = document.getElementById('dateValueForType2');
+                datevalue.innerHTML = nowDate;
+	            
+	            $('#addDateForType2').empty();
+	            laydate.render({
+	                 elem: '#addDateForType2'
+	                 , position: 'static'
+	                 , value: new Date()
+	                 , showBottom: false
+	                 , change: function (value, date, endDate) {
+	                      var datevalue = document.getElementById('dateValueForType2');
+	                      datevalue.innerHTML = value;
+	                 }
+	            });
+	            
+	            layer.open({
+	                type: 1,
+	                title: '新增疫苗本',
+	                content: $('#addType2-hiddenarea'),
+	                area: '500px',
+	                btnAlign: 'r',
+	                btn: ['确定', '取消'],
+	                resize: false,
+	                yes: function (index, layero) {
+	                	var name = document.getElementById("noteType2-name").value;
+	                	if (name.length <= 14 && name.length > 0) {
+	                        $.ajax({
+	                            url: "<%=basePath%>AddNoteType2",
+	                            type: "post",
+	                            data: {
+	                                name:name,
+	                                date: $('#dateValueForType2').text()
+	                            },
+	                            async: false,
+	                            success: function (data) {
+	                                 updateData();
+	                            }, error: function (data) {
+	                            }
+	                        });
+	                        layer.close(index);
+	                    }
+	                    else {
+	                        layer.msg("请按要求输入！");
+	                    }
+	                },
+	                btn2: function (index, layero) {
+	                     layer.close(index);
+	                },
+	                cancel: function (index, layero) {
+	                     layer.close(index);
+	                }
+	            });
+	        });
+	        return false;    
+    	});
+   
+   
 	</script>
 </body>
 

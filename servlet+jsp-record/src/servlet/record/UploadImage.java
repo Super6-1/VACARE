@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.sql.SQLException;
-
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -51,24 +52,29 @@ public class UploadImage extends HttpServlet {
 		
 		String fileName = part.getSubmittedFileName();//直接获取文件名, tomcat8.0以上
 
-		if(!uploadFileDir.exists()) {
-			uploadFileDir.mkdir();
-		}
+		Timestamp t = new Timestamp(System.currentTimeMillis());
+		String result = t.getTime()+"-"+fileName;
+		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		if(fileName != null) {
 			//上传到服务器
-			part.write(uploadFileDir + File.separator + fileName);
-			File searchFile = new File(searchFileDir + File.separator + fileName);
-			File target = new File(uploadFileDir + File.separator + fileName);
+			part.write(uploadFileDir + "/" + result);
+			File searchFile = new File(searchFileDir + "/" + result);
+			File target = new File(uploadFileDir +"/" + result);
 			Files.copy(target.toPath(), searchFile.toPath());
+			
+			HashMap<String, Object> data=new HashMap<String, Object>();
+			data.put("src", "uploadFiles" + "/" + result);
+			map.put("code", 0);
+			map.put("status", 1);
+			map.put("msg", "上传成功");
+			map.put("data", data);
 		}
-		
-		HashMap<String, Object> map=new HashMap<String, Object>();
-		HashMap<String, Object> data=new HashMap<String, Object>();
-		data.put("src", "uploadFiles" + File.separator + fileName);
+		else {
 		map.put("code", 0);
-		map.put("msg", "上传成功");
-		map.put("data", data);
+		map.put("status", 0);
+		map.put("msg", "上传失败");		
+		}
 		
 		String CONTENT_TYPE = "application/json; charset=GBK";
 		 response.setContentType(CONTENT_TYPE);

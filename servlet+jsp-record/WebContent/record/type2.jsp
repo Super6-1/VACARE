@@ -232,22 +232,22 @@
                                                         <p class="record_text"> {{value.text}}</p>
                                                         <div class="row RecordImages">
                                                             <div class="col-xs-6 col-md-3 pic1 hidden">
-                                                                <a href="#" class="thumbnail">
+                                                                <a class="thumbnail">
                                                                     <img src="{{value.pic1}}" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic2 hidden">
-                                                                <a href="#" class="thumbnail">
+                                                                <a class="thumbnail">
                                                                     <img src="{{value.pic2}}" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic3 hidden">
-                                                                <a href="#" class="thumbnail">
+                                                                <a class="thumbnail">
                                                                     <img src="{{value.pic3}}" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic4 hidden">
-                                                                <a href="#" class="thumbnail">
+                                                                <a class="thumbnail">
                                                                     <img src="{{value.pic4}}" alt="...">
                                                                 </a>
                                                             </div>
@@ -306,7 +306,7 @@
                     <div class="layui-inline">
       					<label class="layui-form-label">疫苗名称</label>
       					<div class="layui-input-block">
-                         <input type="text" name="vaccine-name" autocomplete="off" placeholder="请输入名称"
+                         <input type="text" name="vaccineName" autocomplete="off" placeholder="请输入名称"
                               class="layui-input" style="width:400px">
                     	</div>
                     </div>
@@ -315,7 +315,7 @@
                     <div class="layui-inline">
       					<label class="layui-form-label">记录内容</label>
       					<div class="layui-input-block">
-                         <textarea placeholder="请输入内容" id="record-text" class="layui-textarea" style="width:400px"></textarea>
+                         <textarea placeholder="请输入内容" name="recordText" id="recordText" class="layui-textarea" style="width:400px"></textarea>
                     	</div>
                     </div>
                </div>
@@ -328,21 +328,6 @@
             </blockquote>
         </div>
 
-
-
-
-        <!--       <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
-            <legend>选择图片</legend>
-        </fieldset>
-        <div class="layui-upload-drag" id="#uploadPhoto" style="margin-left:50px">
-            <i class="layui-icon"></i>
-            <p>点击上传，或将文件拖拽到此处</p>
-            <div class="layui-hide" id="uploadView">
-                <hr>
-                <img src="" alt="上传成功后渲染" style="max-width: 196px">
-            </div>
-        </div>
-    </div>-->
 
 
         <!-- SCRIPTS -->
@@ -392,7 +377,7 @@
 
             </script>
             
-             <script>
+        <script>
             $(document).ready(function () {
                 var url = window.location.href;
                 var Note_id = url.split('=')[1].split('&')[0];
@@ -486,46 +471,45 @@
             $('body').on('click', '#add-record', function () {
 
                 var note_id = document.URL.split('=')[1].split('&')[0];
-                var record_id = $(this).parent().parent().parent().children(".col-md-9").children(".record_id").text();
 
-                layui.use(['laydate', 'layer','upload'], function () { //独立版的layer无需执行这一句
+                layui.use(['laydate', 'layer','upload','form'], function () { //独立版的layer无需执行这一句
                     var $ = layui.jquery, layer = layui.layer,upload = layui.upload; //独立版的layer无需执行这一句
                     var laydate = layui.laydate;
-                   
+                    var form = layui.form;
                     $('#addDate').empty();
                     laydate.render({
                         elem: '#addDate'
-                   });//多图片上传
+                   });
+                    
+                    var multiple_images = [];
+                    //多图片上传
                     upload.render({
-                        elem: '#uploadPhoto'
-                        , url: '<%=basePath%>UploadMultiImages' //改成您自己的上传接口
-                        , multiple: true  //选完文件后不自动上传
-                        ,auto: false
-                        ,bindAction: '#verify-upload'
-                        ,accept:'images'
-                        , before: function (obj) {
-                            //预读本地文件示例，不支持ie8
-                            obj.preview(function (index, file, result) {
-                                $('#imageView').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">');
-                            });
-                        }
-                    ,done: function(res){
-                        //如果上传失败
-                        if(res.code > 0){
-                            return layer.msg('上传失败');
-                        }
-
-
-                    }
-                    ,error: function(){
-                        //演示失败状态，并实现重传
-                        //var demoText = $('#demoText');
-                       // demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                       // demoText.find('.demo-reload').on('click', function(){
-                        //    uploadInst.upload();
-                        //});
-                    }
-                    });
+                    		elem: '#uploadPhoto'
+                    		, url: '<%=basePath%>UploadImage' //改成您自己的上传接口
+                            ,accept:'images'
+                            ,before: function(obj){
+                                //预读本地文件示例，不支持ie8
+                                if($('#imageView').find('img').length < 4){
+                                	obj.preview(function(index, file, result){
+                                        $('#imageView').append('<img src="'+ result +'" alt="'+ file.name
+                                            +'class="layui-upload-img" style="max-width:100px; ">')
+                                    });
+                                }
+                                else{
+                                	layer.msg("仅能上传四张图片!");
+                                }
+                            }
+                            ,done: function(res){
+                                //如果上传成功
+                                if (res.status == 1) {
+                                    //追加图片成功追加文件名至图片容器
+                                    multiple_images.push(res.data.src);
+                                }else {
+                                	//提示信息
+                                    layer.msg(res.message);
+                                }
+                            }
+                      })
 
 
                         layer.open({
@@ -537,19 +521,40 @@
                             btn: ['确定', '取消'],
                             resize: false,
                             yes: function (index, layero) {
-                            	layero
-                                var verifyform = layui.form.val('verify-form');
-
+                                var addform = layui.form.val('add-form');
+								var date = addform.addDate;
+								var name = addform.vaccineName;
+								var text = addform.recordText;
+								var pic1 = null;
+								var pic2 = null;
+								var pic3 = null;
+								var pic4 = null;
+								if(multiple_images.length > 0){
+									var pic1 = "../../" + multiple_images[0];
+								}
+								if(multiple_images.length > 1){
+									var pic2 = "../../" + multiple_images[1];
+								}
+								if(multiple_images.length > 2){
+									var pic3 = "../../" + multiple_images[2];
+								}
+								if(multiple_images.length > 3){
+									var pic4 = "../../" + multiple_images[3];
+								}
+								multiple_images = [];//清空
+                                
                                 $.ajax({
-                                    url: "<%=basePath%>UpdateRDState",
+                                    url: "<%=basePath%>AddRecord",
                                     type: "post",
                                     data: {
                                         Note_id: note_id,
-                                        RecordDetails_id: rd_id,
-                                        date: verifyform.date,
-                                        batch: verifyform.batchnum,
-                                        site: verifyform.site,
-                                        place: verifyform.place,
+                                        date: date,
+                                        name: name,
+                                        text: text,
+                                        pic1: pic1,
+                                        pic2: pic2,
+                                        pic3: pic3,
+                                        pic4: pic4,
                                     },
                                     async: false,
                                     success: function (data) {
@@ -573,6 +578,20 @@
                  <script>
                 layui.use('layer', function () { //独立版的layer无需执行这一句
                     var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
+                    
+                    layer.photos({
+                    	photos:'.pic1',
+                    })
+                    layer.photos({
+                    	photos:'.pic2',
+                    })
+                    layer.photos({
+                    	photos:'.pic3',
+                    })
+                    layer.photos({
+                    	photos:'.pic4',
+                    })
+                    
                     $(".fa-trash").hover(function () {
                         var trash = $(this);
                         openTrashMsg(trash);

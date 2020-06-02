@@ -204,7 +204,7 @@
         </div>
     </footer>
     
-        <div id="add-hiddenarea" style="margin:20px">
+    <div id="add-hiddenarea" style="margin:20px">
     	<form class="layui-form" action="" lay-filter="add-form">
                <div class="layui-form-item">
                     <div class="layui-inline">
