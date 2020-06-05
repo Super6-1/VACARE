@@ -32,7 +32,19 @@
     <!-- Datatable CSS -->
     <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
     <link rel="stylesheet" href="../css/dataTables.bootstrap.min.css">
-    <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
+    
+    <style media="screen">
+      /** 展开按钮 **/
+      td.details-control {
+        background: url('../images/details_open.png') no-repeat center center;
+        cursor: pointer;
+      }
+ 
+      /** 收起按钮 **/
+      tr.shown td.details-control {
+        background: url('../images/details_close.png') no-repeat center center;
+      }
+    </style>
 </head>
 
 <body>
@@ -150,13 +162,13 @@
                             <table id="DetailTable" class="table table-hover table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <td></td>
+                                       <td class="details-control hidden"></td>
                                         <td class="hidden">范本编号</td>
                                         <td class="hidden">记录编号</td>
-                                        <td>名称</td>
-                                        <td>剂次</td>
-                                        <td>计划注射时间</td>
-                                        <td>注射部位</td>
+                                        <td style="min-width:100px">名称</td>
+                                        <td style="min-width:20px">剂次</td>
+                                        <td style="min-width:50px">计划注射时间</td>
+                                        <td style="min-width:100px">注射部位</td>
                                         <td>备注</td>
 
                                     </tr>
@@ -166,7 +178,7 @@
                                 <script type="text/html" id="tbody-script">
                                 {{ each data value i }}
                                     <tr class="table-data-line">
-										<td></td>
+										<td class="details-control hidden"></td>
                                         <td class="hidden"> {{ value.note_id }} </td>
 										<td class="hidden"> {{ value.sta_id }} </td>
                                         <td> {{ value.name }} </td>
@@ -238,30 +250,28 @@
     <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
     <script src="../plugins/layui/layui.js"></script>
-    <script type="text/javascript">
-        $('#DetailTable').dataTable({
-            "bLengthChange": true, //开关，是否显示每页显示多少条数据的下拉框
-            'iDisplayLength': 5, //每页初始显示5条记录
-            'bFilter': true,  //是否使用内置的过滤功能（是否去掉搜索框）
-            "bInfo": true, //开关，是否显示表格的一些信息(当前显示XX-XX条数据，共XX条)
-            "bPaginate": true, //开关，是否显示分页器
-            "bSort": true, //是否可排序 
-            "oLanguage": {  //语言转换
-                "sInfo": "显示第 _START_ 至 _END_ 项结果，共_TOTAL_ 项",
-                "sZeroRecords": "对不起，查询不到任何相关数据",
-                "sLengthMenu": "每页显示 _MENU_ 项结果",
-                "oPaginate": {
-                    "sFirst": "首页",
-                    "sPrevious": "前一页",
-                    "sNext": "后一页",
-                    "sLast": "尾页"
-                }
-            }
-        });
-    </script>
     
     <script type="text/javascript">
+ /*   //给每一行添加展开或收起的监听
+    $('#DetailTable tbody').on('click', '.details-control', function () {
+        var td = $(this).closest('td');
+        var row = table.row(tr);
+		console.log(row);
+        if ( row.child.isShown() ) {
+            //如果该行已经打开，则关闭
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            //关闭这已行
+            row.child().show();
+            tr.addClass('shown');
+        }
+    });
+
+ */   
     	function updateData(Note_id){
+	 		$("#DetailTable").dataTable().fnDestroy();
     		$.ajax({
                 url: "<%=basePath%>QueryModelDetails",
                 type: "post",
@@ -278,6 +288,26 @@
                     }
                     $("#tbody").empty();
                     $("#tbody").append(template("tbody-script", { data: data }));
+                    
+                    $("#DetailTable").dataTable({
+                        "bLengthChange": true, //开关，是否显示每页显示多少条数据的下拉框
+                        'iDisplayLength': 5, //每页初始显示5条记录
+                        'bFilter': true,  //是否使用内置的过滤功能（是否去掉搜索框）
+                        "bInfo": true, //开关，是否显示表格的一些信息(当前显示XX-XX条数据，共XX条)
+                        "bPaginate": true, //开关，是否显示分页器
+                        "bSort": true, //是否可排序 
+                        "oLanguage": {  //语言转换
+                          "sInfo": "显示第 _START_ 至 _END_ 项结果，共_TOTAL_ 项",
+                          "sZeroRecords": "对不起，查询不到任何相关数据",
+                          "sLengthMenu": "每页显示 _MENU_ 项结果",
+                          "oPaginate": {
+                            "sFirst": "首页",
+                            "sPrevious": "前一页",
+                            "sNext": "后一页",
+                            "sLast": "尾页"
+                          }
+                        }
+                      });
                 }, error: function (data) {
                 }
             });
@@ -364,7 +394,7 @@
                                 Note_id: Note_id,
                                 name:name,
                                 date: $('#datevalue').text(),
-                                pic: "",
+                                pic: "../images/notetype1.jpg",
                             },
                             async: false,
                             success: function (data) {

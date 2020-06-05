@@ -53,7 +53,7 @@ public class AddNoteType2 extends HttpServlet {
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = dao.getAllNum(1); //User_id
+			int num = dao.getMaxNum(1); //User_id
 			dao.addType2(1, ++num, name, pic, date);
 			
 		} catch (SQLException e) {

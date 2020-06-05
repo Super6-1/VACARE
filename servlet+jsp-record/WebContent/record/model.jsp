@@ -258,7 +258,7 @@
                                      Note_id: Note_id,
                                      name:name,
                                      date: $('#datevalue').text(),
-                                     pic: "",
+                                     pic: "../images/notetype1.jpg",
                                  },
                                  async: false,
                                  success: function (data) {

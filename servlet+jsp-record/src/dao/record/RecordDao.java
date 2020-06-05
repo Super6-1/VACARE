@@ -68,9 +68,9 @@ public class RecordDao {
 		    stmt.execute(sql);
 		}
 		
-		public int getAllNum(int User_id, int Note_id) throws SQLException
+		public int getMaxNum(int User_id, int Note_id) throws SQLException
 		{
-			String sql  = "select count(Record_id) from record where User_id = " + User_id+" and Note_id = " + Note_id;
+			String sql  = "select max(Record_id) from record where User_id = " + User_id+" and Note_id = " + Note_id;
 		    System.out.println(sql);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next())

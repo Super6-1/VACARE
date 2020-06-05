@@ -170,23 +170,23 @@
                                                         <p class="record_text">记录内容，可作为疫苗记录的说明，最多不超过400字。在每一个记录模块，图片不得超过4张。快点击新增按钮，添加自己的疫苗记录，开始使用吧！还有哦，此模块作为效果展示，不可以进行修改内容与删除。</p>
                                                         <div class="row RecordImages">
                                                             <div class="col-xs-6 col-md-3 pic1">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="#" alt="...">
+                                                                <a class="thumbnail">
+                                                                    <img src="../images/type2-example1.jpg" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic2">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="#" alt="...">
+                                                                <a class="thumbnail">
+                                                                    <img src="../images/type2-example2.jpg" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic3">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="#" alt="...">
+                                                                <a class="thumbnail">
+                                                                    <img src="../images/type2-example3.jpg" alt="...">
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-md-3 pic4">
-                                                                <a href="#" class="thumbnail">
-                                                                    <img src="#" alt="...">
+                                                                <a class="thumbnail">
+                                                                    <img src="../images/type2-example4.jpg" alt="...">
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -349,6 +349,9 @@
                     },
                     async: false,
                     success: function (data) {
+                    	if(data == "" || data.length == 0){
+                    		return false;
+                    	} else { 
                         $("#recordData").empty();
                         $("#recordData").append(template("recordData-script", { data: data }));
                         var i = 0;
@@ -357,24 +360,24 @@
                         var pic3 = document.getElementsByClassName("pic3");
                         var pic4 = document.getElementsByClassName("pic4");
                         for (i = 0; i < data.length; i++) {
-                            if (data[i]['pic1'] != null) {
+                            if (data[i]['pic1'] != null && data[i]['pic1'] != "") {
                                 pic1[i].classList.remove('hidden');
                             }
-                            if (data[i]['pic2'] != null) {
+                            if (data[i]['pic2'] != null && data[i]['pic2'] != "") {
                                 pic2[i].classList.remove('hidden');
                             }
-                            if (data[i]['pic3'] != null) {
+                            if (data[i]['pic3'] != null && data[i]['pic3'] != "") {
                                 pic3[i].classList.remove('hidden');
                             }
-                            if (data[i]['pic4'] != null) {
+                            if (data[i]['pic4'] != null && data[i]['pic4'] != "") {
                                 pic4[i].classList.remove('hidden');
                             }
                         }
+                    	}
                     }, error: function (data) {
                     }
                 });
             }
-
             </script>
             
         <script>
@@ -491,8 +494,8 @@
                                 //预读本地文件示例，不支持ie8
                                 if($('#imageView').find('img').length < 4){
                                 	obj.preview(function(index, file, result){
-                                        $('#imageView').append('<img src="'+ result +'" alt="'+ file.name
-                                            +'class="layui-upload-img" style="max-width:100px; ">')
+                                        $('#imageView').append('<div style="float:left;height:120px;width:120px;padding:2px;margin-left:10px;overflow:hidden"><img src="'+ result +'" alt="'+ file.name
+                                            +'class="layui-upload-img" style="width:100%; height:100%; object-fit:cover "></div>')
                                     });
                                 }
                                 else{
@@ -525,6 +528,14 @@
 								var date = addform.addDate;
 								var name = addform.vaccineName;
 								var text = addform.recordText;
+								if(date == ""){
+									layer.msg("请选择日期！");
+									return false;
+								}
+								if(name == ""){
+									layer.msg("请填写疫苗名称！");
+									return false;
+								}
 								var pic1 = null;
 								var pic2 = null;
 								var pic3 = null;
@@ -624,8 +635,7 @@
                     }
                 });
                 </script>
-                
-
+               
 </body>
 
 </html>

@@ -96,9 +96,9 @@ public class NoteDao {
 		    stmt.execute(sql);
 		}
 		
-		public int getAllNum(int User_id) throws SQLException
+		public int getMaxNum(int User_id) throws SQLException
 		{
-			String sql  = "select count(Note_id) from note where User_id = " + User_id;
+			String sql  = "select max(Note_id) from note where User_id = " + User_id;
 		    System.out.println(sql);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next())

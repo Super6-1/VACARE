@@ -33,7 +33,6 @@
      <!-- Datatable CSS -->
      <link rel="stylesheet" href="../css/buttons.dataTables.min.css">
      <link rel="stylesheet" href="../css/dataTables.bootstrap.min.css">
-     <link rel="stylesheet" href="../css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -160,16 +159,16 @@
                                         <tbody id="tbody">
                                         </tbody>
                                         <script type="text/html" id="tbody-script">
-                                {{ each data value i }}
+                                	{{ each data value i }}
                                     <tr class="table-data-line">
 										<td> {{ value.name }} </td>
                                         <td> {{ value.dose }} </td>
 										<td> {{ value.date }} </td>
-                                        <td> {{ value.batch }} </td>
+                                        <td><a href="queryprocess.jsp?number={{value.batch}}" title="查询批次详情"> {{ value.batch }} </a></td>
                                         <td> {{ value.site }} </td>
                                         <td> {{ value.place }} </td>
                                     </tr>
-                                {{ /each }}
+                                	{{ /each }}
                                 </script>
                                    </table>
                               </div>
@@ -189,6 +188,7 @@
                                     <div class="vaccine-future">
                                 		<h4> {{ value.name }} &nbsp;<small> 剂次：{{ value.dose }} </small></h4>
                                 		<div class="date">{{ value.date }}</div>
+										<div style="margin-top: 8px">{{value.internal}}</div>
 										<div class="recordDetails_id hidden">{{value.recordDetails_id}}</div> 
                                			<div class="record-icons" style="font-size: 24px;margin-top: -24px;">
                                     		<i class="record-icon fa fa-calendar" style="padding-left:15px"></i>
@@ -274,33 +274,15 @@
      <script src="../js/smoothscroll.js"></script>
      <script src="../js/custom.js"></script>
      <script src="../js/template.js"></script>
+     <script type="text/javascript" src="../js/datatables.min.js"></script>
      <script type="text/javascript" src="../js/jquery.dataTables.min.js"></script>
      <script type="text/javascript" src="../js/dataTables.bootstrap.min.js"></script>
      <script src="../js/template.js"></script>
      <script src="../plugins/layui/layui.js"></script>
-     <script type="text/javascript">
-          $('#DetailTable').dataTable({
-               "bLengthChange": true, //开关，是否显示每页显示多少条数据的下拉框
-               'iDisplayLength': 5, //每页初始显示5条记录
-               'bFilter': true,  //是否使用内置的过滤功能（是否去掉搜索框）
-               "bInfo": true, //开关，是否显示表格的一些信息(当前显示XX-XX条数据，共XX条)
-               "bPaginate": true, //开关，是否显示分页器
-               "bSort": true, //是否可排序 
-               "oLanguage": {  //语言转换
-                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共_TOTAL_ 项",
-                    "sZeroRecords": "对不起，查询不到任何相关数据",
-                    "sLengthMenu": "每页显示 _MENU_ 项结果",
-                    "oPaginate": {
-                         "sFirst": "首页",
-                         "sPrevious": "前一页",
-                         "sNext": "后一页",
-                         "sLast": "尾页"
-                    }
-               }
-          });
-     </script>
      <script>
           function updateData(Note_id) {
+        	  $("#DetailTable").dataTable().fnDestroy();
+        	  
                var state = 1;
                $.ajax({
                     url: "<%=basePath%>QueryNoteDetails",
@@ -318,6 +300,7 @@
                     }
                });
 
+               var now = new Date();
                var state = 0;
                $.ajax({
                     url: "<%=basePath%>QueryNoteDetails",
@@ -331,11 +314,42 @@
                          console.log(data);
                          if (data.length > 0) {
                               $("#future").empty();
+                              for(var i = 0; i < data.length; i++){
+                            		var plan = new Date(data[i]['date']);
+                            		var days=Math.ceil((plan - now)/(1*24*60*60*1000));
+                            		if(days > 0) {
+                            			data[i]['internal'] = "距离计划接种日期还有" + days + "天";			
+                            		} else if(days == 0) {
+                            			data[i]['internal'] = "已到期";
+                            		} else {
+                            			data[i]['internal'] = "已逾期";
+                            		}
+                              }
                               $("#future").append(template("future-script", { 'data': data }));
                          }
                     }, error: function (data) {
                     }
                });
+               
+               $('#DetailTable').dataTable({
+                   'iDisplayLength': 10, //每页初始显示5条记录
+                   'bFilter': true,  //是否使用内置的过滤功能（是否去掉搜索框）
+                   "bInfo": true, //开关，是否显示表格的一些信息(当前显示XX-XX条数据，共XX条)
+                   "bPaginate": true, //开关，是否显示分页器
+                   "bSort": true, //是否可排序 
+                   "oLanguage": {  //语言转换
+                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共_TOTAL_ 项",
+                        "sZeroRecords": "对不起，查询不到任何相关数据",
+                        "sLengthMenu": "每页显示 _MENU_ 项结果",
+                        "oPaginate": {
+                             "sFirst": "首页",
+                             "sPrevious": "前一页",
+                             "sNext": "后一页",
+                             "sLast": "尾页"
+                        }
+                   }
+              });
+              
           }
 
           $(document).ready(function () {
@@ -367,6 +381,7 @@
                updateData(Note_id);
                $('#changeDate-hiddenarea').hide();
                $('#complete-hiddenarea').hide();
+               
           })
 
           $('body').on('click', '.record-icon.fa-trash', function () {

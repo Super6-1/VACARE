@@ -134,7 +134,7 @@
                               <div class="vaccine-recommend">
                                    <a data-toggle="collapse" href="#collapseExample1" aria-expanded="false"
                                         aria-controls="collapseExample">
-                                        <h4>破伤风疫苗</h4>
+                                        <h4 id="vaccine-name">破伤风疫苗</h4>
                                    </a>
                                    <div class="record-icons" style="font-size: 24px; margin-top: -36px;">
                                         <i class="record-icon fa fa-plus" style="padding-left:15px"></i>
@@ -160,7 +160,7 @@
                               <div class="vaccine-recommend">
                                    <a data-toggle="collapse" href="#collapseExample2" aria-expanded="false"
                                         aria-controls="collapseExample">
-                                        <h4>破伤风疫苗</h4>
+                                        <h4 id="vaccine-name">破伤风疫苗</h4>
                                    </a>
                                    <div class="record-icons" style="font-size: 24px; margin-top: -36px;">
                                         <i class="record-icon fa fa-plus" style="padding-left:15px"></i>

@@ -162,6 +162,7 @@
                                     <div class="col-md-10">
                                         <h4 class="note-name">{{value.name}}</h4>
                                         <h5>{{value.date}}</h5>
+										<h5>{{value.internal}}</h5>
 										<p class="note-id hidden">{{value.note_id}}</p>
 										<p class="note-type hidden">{{value.type}}</p>
                                         <div class="record-icons" style="font-size: 24px;">
@@ -276,11 +277,48 @@
                 async: false,
                 success: function (data) {
                     console.log(data);
-                    $("#recordNote-show").empty();
-                    $("#recordNote-show").append(template("recordNoteShow-script", { data: data }));
+                    var now = new Date();
+                    var state = 0;
+                    for(var i = 0; i < data.length; i++){
+                    	if(data[i]['type'] == 1){
+                    		$.ajax({
+                         		url: "<%=basePath%>QueryNoteDetails",
+                         		type: "post",
+                         		data: {
+                              		Note_id: data[i]['note_id'],
+                              		state: state,
+                         		},
+                         		async: false,
+                         		success: function (subdata) {
+                              		if (subdata.length > 0) {
+                                 		var plan = new Date(subdata[0]['date']);
+                                 		var days=Math.ceil((plan - now)/(1*24*60*60*1000));
+                                 		if(days > 0) {
+                                 			data[i]['internal'] = "距离计划接种日期还有" + days + "天";			
+                                 		} else if(days == 0) {
+                                 			data[i]['internal'] = "已到期";
+                                 		} else {
+                                 			data[i]['internal'] = "已逾期";
+                                 		}
+                                  	} 
+                              		else {
+                            	  		data[i]['internal'] = "暂无计划";
+                              		}
+                         		}, error: function (data) {
+                         		}
+                   	 		});
+                		}
+                    	else {
+                    		data[i]['internal'] = "";
+                    	}
+                    	$("#recordNote-show").empty();
+                    	$("#recordNote-show").append(template("recordNoteShow-script", { data: data }));
+                	}
                 }, error: function (data) {
                 }
-            });
+            	});
+            
+            
         }
 
         $(document).ready(function () {
@@ -408,7 +446,6 @@
                 var date = new Date();
                 var id = date.getTime();
                 
-                layui.$('#uploadDemoView').addClass('layui-hide');
                 upload.render({
                     elem: '#choosePicView'
                     ,url:  "<%=basePath%>UploadImage" //改成您自己的上传接口
@@ -442,6 +479,7 @@
                                   success: function (data) {
                                       updateData();
                                       $('#changePic #uploadView').find('img').removeAttr('src');
+                                      window.location.reload();
                                   }, error: function (data) {
                                   }
                               });
@@ -501,7 +539,8 @@
 	                            type: "post",
 	                            data: {
 	                                name:name,
-	                                date: $('#dateValueForType1').text()
+	                                date: $('#dateValueForType1').text(),
+	                                pic:"../images/notetype1.jpg"
 	                            },
 	                            async: false,
 	                            success: function (data) {
@@ -565,7 +604,8 @@
 	                            type: "post",
 	                            data: {
 	                                name:name,
-	                                date: $('#dateValueForType2').text()
+	                                date: $('#dateValueForType2').text(),
+	                                pic: "../images/notetype2.jpg"
 	                            },
 	                            async: false,
 	                            success: function (data) {

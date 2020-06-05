@@ -1,30 +1,14 @@
 package servlet.record;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-import com.alibaba.fastjson.JSONArray;
-
-import bean.record.stdvac;
 import dao.record.NoteDao;
-import dao.record.RecordDetailsDao;
-import dao.record.StdVacDao;
+
 
 // ¿©’π HttpServlet ¿‡
 @WebServlet (name = "AddNoteType1", urlPatterns = {"/AddNoteType1"})
@@ -53,7 +37,7 @@ public class AddNoteType1 extends HttpServlet {
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = dao.getAllNum(1); //User_id
+			int num = dao.getMaxNum(1); //User_id
 			dao.addType1(1, ++num, name, pic, date);
 			
 		} catch (SQLException e) {

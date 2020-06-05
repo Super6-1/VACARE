@@ -58,7 +58,7 @@ public class AddNoteType1WithData extends HttpServlet {
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = notedao.getAllNum(1); //User_id
+			int num = notedao.getMaxNum(1); //User_id
 			notedao.addType1(1, ++num, name, pic, date);
 			
 			 List<stdvac> list = SVdao.selectByNoteid(Note_id);

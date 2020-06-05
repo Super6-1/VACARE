@@ -49,7 +49,7 @@ public class RecordDetailsDao {
 		
 		public List<recorddetails> selectByNoteidandState(Integer User_id, Integer Note_id, Integer state) throws SQLException
 		{
-			String sql = "select * from recorddetails where RD_State = '" +state+"' and User_id = " + User_id + " and Note_id = "  + Note_id+ ";";
+			String sql = "select * from recorddetails where RD_State = '" +state+"' and User_id = " + User_id + " and Note_id = "  + Note_id+ " order by RD_Date;";
 			System.out.println(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			List<recorddetails> RD = new ArrayList<>();
@@ -97,9 +97,9 @@ public class RecordDetailsDao {
 		    stmt.execute(sql);
 		}
 		
-		public int getAllNum(int User_id, int Note_id) throws SQLException
+		public int getMaxNum(int User_id, int Note_id) throws SQLException
 		{
-			String sql  = "select count(RecordDetails_id) from recorddetails where User_id = " + User_id+" and Note_id = " + Note_id;
+			String sql  = "select max(RecordDetails_id) from recorddetails where User_id = " + User_id+" and Note_id = " + Note_id;
 		    System.out.println(sql);
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next())
