@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mysql.jdbc.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -42,44 +42,47 @@
 
 
 
-    <!-- MENU -->
-    <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation">
-        <div class="container">
+        	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
 
-            <div class="navbar-header">
+			 <div class="navbar-header">
 
-                <!-- lOGO TEXT HERE -->
-                <a href="../index.html" class="navbar-brand">VACARE</a>
-            </div>
+				  <!-- lOGO TEXT HERE -->
+				  <a href="../index.jsp" class="navbar-brand">VACARE</a>
+			 </div>
 
-            <!-- MENU LINKS -->
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="../index.html" class="smoothScroll">首页</a></li>
-                         <li><a href="information.jsp" class="smoothScroll">疫苗资讯</a></li>
-                         <li><a href="query.jsp" class="smoothScroll">疫苗查询</a></li>
-                    <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
-                    <li><a href="#" class="smoothScroll">接种信息</a></li>
-                    <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
-                </ul>
-                <ul class="nav navbar-nav" style="float: right;">
-                    <!-- 小人菜单栏-->
-                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
-                                        class="fa fa-user-circle-o fa-lg"></i></a>
-                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                                   <li><a class="dropdown-item" href="../user/Info.jsp"><i
-                                                  class="fa fa-edit fa-lg" ></i> &nbsp;个人资料</a></li>
-                                   <li><a class="dropdown-item" href="../user/Password.jsp"><i
-                                                  class="fa fa-cog fa-lg"x></i> &nbsp;修改密码</a></li>
-                                   <li><a class="dropdown-item" href="../index.html"><i
-                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
-                              </ul>
-                         </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-    <!-- FEATURE -->
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="../index.jsp" class="smoothScroll">首页</a></li>
+					   <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="../maps/address.jsp" class="smoothScroll">接种信息</a></li>
+					   <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="../user/login.jsp" title="登录注册"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+					   </li>
+					   <li class="dropdown"><a data-toggle="dropdown" title="修改信息"><i
+									  class="fa fa-cog fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								 <li><a class="dropdown-item" href="../user/Info.jsp"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="../user/Password.jsp"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href=<%=request.getContextPath() +"/exit"%>><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+					  
+				  </ul>
+			 </div>
+		</div>
+	</section>
 
     <section>
         <div class="container">
@@ -100,47 +103,46 @@
         //创建Statement
         Statement stm = (Statement) conn.createStatement();
         
-        String content=request.getParameter("id");%>
-
-
-                        <%  String[] tmp=new String[3];
-        tmp=content.split(",");
+        String content=request.getParameter("id");//获取文章id和当前目录页数
+        String[] tmp=new String[3];
+        tmp=content.split(",");//进行字符分割
         String id=tmp[0];
-        String home=tmp[1];//返回对应页数
+        String home=tmp[1];//当前目录对应页数
      
         //执行查询
        ResultSet rs = stm.executeQuery("select id,title,date,essay,source,link from zixun where id="+id);
        rs.last();
-       %>
+    %>
 
 
                         <div style="width:100%;">
 
-    <h3 style=" text-align:center"><%=rs.getString("title")%></h3>
-
-                            <h5 style="text-align:right"><%=rs.getString("date")%></h5>
-                            <h5>
-                                <pre style="
-    background-color: white !important;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    *word-wrap: break-word;
-    *white-space : normal ;
-    font-size:1em">
-    <%=rs.getString("essay")%></pre>
-                            </h5>
+                            <h3 style=" text-align:center"><%=rs.getString("title")%></h3>
+                                <h5 style="text-align:right"><%=rs.getString("date")%></h5>
+                                <h5>
+                                   <pre style="
+                                    background-color: white !important;
+                                    white-space: pre-wrap;
+                                    white-space: -moz-pre-wrap;
+                                    white-space: -pre-wrap;
+                                    white-space: -o-pre-wrap;
+                                    *word-wrap: break-word;
+                                    *white-space : normal ;
+                                    font-size:1em">
+                                    <%=rs.getString("essay")%></pre>
+                              </h5>
 
                             <h5 style="text-align:right"><a
                                     href="<%=rs.getString("link")%>">点击查看原文：<%=rs.getString("source")%></a></h5>
                             <h5 style="text-align:right"><a href="information.jsp?page=<%=home%>">返回</a></h5>
 
 
-                            <%rs.close();
-  stm.close();
-  conn.close();
-%>
+                            <%
+                               //关闭数据库连接
+                               rs.close();
+                               stm.close();
+                               conn.close();
+                            %>
 
                         </div>
                     </div>
@@ -161,7 +163,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <ul class="social-icon">
-                            <li><a data-scroll style="padding: 5px;" href="#start">返回首页</a></li>
+                            <li><a data-scroll style="padding: 5px;" href="../index.jsp">返回首页</a></li>
 
                         </ul>
                     </div>

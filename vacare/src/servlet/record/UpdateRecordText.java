@@ -38,13 +38,13 @@ public class UpdateRecordText extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		Integer Record_id = Integer.parseInt(request.getParameter("Record_id"));
       		String text = request.getParameter("text");
-			dao.setRecordName(1, Note_id, Record_id, text);
+			dao.setRecordName(User_id, Note_id, Record_id, text);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

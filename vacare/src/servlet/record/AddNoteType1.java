@@ -30,15 +30,15 @@ public class AddNoteType1 extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		String name = request.getParameter("name");
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = dao.getMaxNum(1); //User_id
-			dao.addType1(1, ++num, name, pic, date);
+			int num = dao.getMaxNum(User_id); //User_id
+			dao.addType1(User_id, ++num, name, pic, date);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

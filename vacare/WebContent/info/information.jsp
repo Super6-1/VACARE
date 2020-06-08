@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mysql.jdbc.Statement"%>
 <%@page import="java.sql.DriverManager"%>
@@ -45,43 +45,47 @@
     </section>
 
 
-    <!-- MENU -->
-    <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation">
-        <div class="container">
+        	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
 
-            <div class="navbar-header">
+			 <div class="navbar-header">
 
-                <!-- lOGO TEXT HERE -->
-                <a href="../index.html" class="navbar-brand">VACARE</a>
-            </div>
+				  <!-- lOGO TEXT HERE -->
+				  <a href="../index.jsp" class="navbar-brand">VACARE</a>
+			 </div>
 
-            <!-- MENU LINKS -->
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="../index.html" class="smoothScroll">首页</a></li>
-                         <li><a href="information.jsp" class="smoothScroll">疫苗资讯</a></li>
-                         <li><a href="query.jsp" class="smoothScroll">疫苗查询</a></li>
-                    <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
-                    <li><a href="#" class="smoothScroll">接种信息</a></li>
-                    <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
-                </ul>
-                <ul class="nav navbar-nav" style="float: right;">
-                    <!-- 小人菜单栏-->
-                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
-                                        class="fa fa-user-circle-o fa-lg"></i></a>
-                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                                   <li><a class="dropdown-item" href="../user/Info.jsp"><i
-                                                  class="fa fa-edit fa-lg" ></i> &nbsp;个人资料</a></li>
-                                   <li><a class="dropdown-item" href="../user/Password.jsp"><i
-                                                  class="fa fa-cog fa-lg"x></i> &nbsp;修改密码</a></li>
-                                   <li><a class="dropdown-item" href="../index.html"><i
-                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
-                              </ul>
-                         </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="../index.jsp" class="smoothScroll">首页</a></li>
+					   <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="../maps/address.jsp" class="smoothScroll">接种信息</a></li>
+					   <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="../user/login.jsp" title="登录注册"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+					   </li>
+					   <li class="dropdown"><a data-toggle="dropdown" title="修改信息"><i
+									  class="fa fa-cog fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								 <li><a class="dropdown-item" href="../user/Info.jsp"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="../user/Password.jsp"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href=<%=request.getContextPath() +"/exit"%>><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+					  
+				  </ul>
+			 </div>
+		</div>
+	</section>
 
     <section>
         <div class="container">
@@ -101,8 +105,8 @@
                 "123456");
         //创建Statement
         Statement stm = (Statement) conn.createStatement();
-        int pageSize,rowCount,pageCount,curPage;
-        pageSize=15;//一页多少条信息
+        int pageSize,rowCount,pageCount,curPage;//页显示信息条数，信息总条数，总页数，当前页
+        pageSize=15;
         pageCount=1;
         String strPage=request.getParameter("page");
         if(strPage==null) curPage=1;
@@ -120,10 +124,19 @@
         if(curPage>pageCount) curPage=pageCount;
        %>
 
-                    <table style="width:100%; font-size:1.1em">
-                        <%if(pageCount>0) rs.absolute((curPage-1)*pageSize+1);
-int i=0;
-while(i<pageSize&&!rs.isAfterLast()){%>
+                   
+
+     <table style="width:100%; font-size:1.1em">
+                        
+         <%
+              //从第一条信息开始打印到页最后一条信息
+             if(pageCount>0) rs.absolute((curPage-1)*pageSize+1);//指向页第一条信息
+             int i=0;
+                while(i<pageSize&&!rs.isAfterLast()){
+             %>
+
+
+
                         <tr style="margin-top:10px">
                             <td style="max-width:600px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"><a
                                     href="content.jsp?id=<%=rs.getString("id")+","+curPage%>"><%=rs.getString("title")%></a>
@@ -133,25 +146,34 @@ while(i<pageSize&&!rs.isAfterLast()){%>
                             </td>
                         </tr>
 
-                        <%
+      <%
         rs.next();
         i++;
         } %>
 
-                        <%rs.close();
+      <%
+       //关闭数据库连接
+       rs.close();
        stm.close();
        conn.close();
        %>
                     </table>
                     <div style="margin-left: 80%; width:200px;font-size:1.2em; margin-top:20px">
+
+
                         <h5 style="text-algin:right">
                             <%if(curPage>1){ %>
-                            <a href="information.jsp?page=<%=curPage-1%>">上一页</a><%} %>
+                            <a href="information.jsp?page=<%=curPage-1%>">上一页</a>
+                             <%} %>
+
                             <%=curPage %>/<%=pageCount %>
                             <%if(curPage<pageCount){ %>
-                            <a href="information.jsp?page=<%=curPage+1%>">下一页</a><%} %>
+                            <a href="information.jsp?page=<%=curPage+1%>">下一页</a>
+                            <%} %>
                         </h5>
+
                     </div>
+
                 </div>
             </div>
         </div>
@@ -168,7 +190,7 @@ while(i<pageSize&&!rs.isAfterLast()){%>
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <ul class="social-icon">
-                            <li><a data-scroll style="padding: 5px;" href="index.html">返回首页</a></li>
+                            <li><a data-scroll style="padding: 5px;" href="../index.jsp">返回首页</a></li>
                         </ul>
                     </div>
                 </div>

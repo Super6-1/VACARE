@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import javax.swing.text.html.HTMLDocument.Iterator;
 
@@ -31,8 +32,10 @@ public class UploadImage extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		
-		 Part part = request.getPart("file");
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession();
+  		Integer User_id = (Integer) session.getAttribute("id");
+		Part part = request.getPart("file");
 
 		try {
 
@@ -53,7 +56,7 @@ public class UploadImage extends HttpServlet {
 		String fileName = part.getSubmittedFileName();//直接获取文件名, tomcat8.0以上
 
 		Timestamp t = new Timestamp(System.currentTimeMillis());
-		String result = t.getTime()+"-"+fileName;
+		String result = User_id+"-"+ t.getTime()+"-"+fileName;
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		
 		if(fileName != null) {

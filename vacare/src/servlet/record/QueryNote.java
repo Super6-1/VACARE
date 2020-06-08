@@ -38,10 +38,10 @@ public class QueryNote extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
-			List list = dao.selectAll(1);
+			List list = dao.selectAll(User_id);
 			
 		    String CONTENT_TYPE = "application/json; charset=GBK";
 		    response.setContentType(CONTENT_TYPE);

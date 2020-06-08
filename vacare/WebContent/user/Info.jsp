@@ -52,44 +52,47 @@
           </div>
      </section>
 
+	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
 
-     <!-- MENU -->
-     <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
-          <div class="container">
+			 <div class="navbar-header">
 
-               <div class="navbar-header">
+				  <!-- lOGO TEXT HERE -->
+				  <a href="../index.jsp" class="navbar-brand">VACARE</a>
+			 </div>
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="../index.html" class="navbar-brand">VACARE</a>
-               </div>
-
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                         <li><a href="../index.html" class="smoothScroll">首页</a></li>
-                         <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
-                         <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
-                         <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
-                         <li><a href="../maps/Address.html" class="smoothScroll">接种信息</a></li>
-                         <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav" style="float: right;">
-                         <!-- 小人菜单栏-->
-                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
-                                        class="fa fa-user-circle-o fa-lg"></i></a>
-                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                                   <li><a class="dropdown-item" href="Info.jsp"><i
-                                                  class="fa fa-edit fa-lg" ></i> &nbsp;个人资料</a></li>
-                                   <li><a class="dropdown-item" href="Password.jsp"><i
-                                                  class="fa fa-cog fa-lg"x></i> &nbsp;修改密码</a></li>
-                                   <li><a class="dropdown-item" href="../index.html"><i
-                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
-                              </ul>
-                         </li>
-                    </ul>
-               </div>
-          </div>
-     </section>
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="../index.jsp" class="smoothScroll">首页</a></li>
+					   <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="../maps/address.jsp" class="smoothScroll">接种信息</a></li>
+					   <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="login.jsp" title="登录注册"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+					   </li>
+					   <li class="dropdown"><a data-toggle="dropdown" title="修改信息"><i
+									  class="fa fa-cog fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								 <li><a class="dropdown-item" href="Info.jsp"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="Password.jsp"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href=<%=request.getContextPath() +"/exit"%>><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+					  
+				  </ul>
+			 </div>
+		</div>
+   </section>
 
 
 
@@ -138,7 +141,7 @@
                                                    <div class="form-group row">
                                                      <label class="control-label col-md-3">姓名</label>
                                                      <div class="col-md-8" >
-                                                       <input class="form-control" type="text" placeholder="请填写姓名" id="n">
+                                                       <input class="form-control" type="text" placeholder="请填写姓名" id="n" disabled="true">
                                                      </div>
                                                    </div>
                                                    <div class="form-group row">
@@ -203,7 +206,7 @@
                          </div>
                          <div class="col-md-6 col-sm-6">
                               <ul class="social-icon">
-                                   <li><a data-scroll style="padding: 5px;" href="#start">返回开始</a></li>
+                                   <li><a data-scroll style="padding: 5px;" href="../index.jsp">返回首页</a></li>
 
                               </ul>
                          </div>
@@ -222,16 +225,19 @@
      <script src="../js/custom.js"></script>
      <script src="../plugins/layui/layui.js"></script>
      <script>
-          function huan() {
+     //展示修改
+     function huan() {
                $(".showdata").hide();
                $(".hhh").show();
           }
-          function cancel() {
+     //取消修改
+     function cancel() {
         	  $(".hhh").hide();
               $(".showdata").show();
          }
      </script>
      <script>     
+     //运行时取数据加入固定展示页面，并在修改的框中也展示数据，便于修改
      $(document).ready(function () {
     	 var label="<label class=\"control-label col-md-3\" >";
     	 var lab="<label class=\"control-label col-md-3\" style=\"text-align: center;\">";
@@ -240,11 +246,13 @@
              url:"<%=basePath%>queryPwd",
              type: "post",
              async: false,
-             data: {
-      	        user_id: 1
-              },
              success: function (data) {
             	 console.log(data);
+            	 data[0].phone = data[0].phone==null? "" :data[0].phone;
+            	 data[0].birthday = data[0].birthday==null? "" :data[0].birthday;
+            	 data[0].location = data[0].location==null? "" :data[0].location;
+            	 data[0].email = data[0].email==null? "" :data[0].email;
+            	 
             	 $("#name").append(label + "姓名" + "</label>" + lab + data[0].username +"</label>");
             	 if(data[0].sex==0){$("#sex").append(label + "性别" + "</label>" + lab + "女" +"</label>");}
             	 if(data[0].sex==1){$("#sex").append(label + "性别" + "</label>" + lab + "男" +"</label>");}
@@ -257,9 +265,11 @@
             	 document.getElementById("b").value = data[0].birthday;
             	 document.getElementById("l").value = data[0].location;
             	 document.getElementById("e").value = data[0].email;
-            	 if(data[0].sex==0){$("#s").append("<input value=1 type=\"radio\" name=\"bg\" />男&nbsp;&nbsp;&nbsp;&nbsp;<input value=0 type=\"radio\" checked=\"checked\"  name=\"bg\"/>女");};
-            	 if(data[0].sex==1){$("#s").append("<input value=1 type=\"radio\" checked=\"checked\" name=\"bg\" />男&nbsp;&nbsp;&nbsp;&nbsp;<input value=0 type=\"radio\"  name=\"bg\"/>女");};
-           
+            	 if(data[0].sex==0){$("#s").append("<input value=1 type=\"radio\" name=\"bg\" />男&nbsp;&nbsp;&nbsp;&nbsp;<input value=0 type=\"radio\" checked=\"checked\"  name=\"bg\"/>女");}
+            	 else if(data[0].sex==1){$("#s").append("<input value=1 type=\"radio\" checked=\"checked\" name=\"bg\" />男&nbsp;&nbsp;&nbsp;&nbsp;<input value=0 type=\"radio\"  name=\"bg\"/>女");}
+            	 else {
+            		 $("#s").append("<input value=1 type=\"radio\" name=\"bg\" />男&nbsp;&nbsp;&nbsp;&nbsp;<input value=0 type=\"radio\"  name=\"bg\"/>女");
+            	 };
             	 layui.use('laydate', function(){
                 	 var laydate = layui.laydate;
                 	 
@@ -278,6 +288,7 @@
      </script>
      
      <script>
+     //更新个人信息
      function changeinfo(){
     	 var username = document.getElementById("n").value;
     	 var phone = document.getElementById("p").value;
@@ -285,18 +296,18 @@
     	 var location = document.getElementById("l").value;
     	 var email = document.getElementById("e").value;
     	 var sex = $(':radio[name="bg"]:checked').val();
+    	 if(sex == null) {sex = 1};
          $.ajax({
              url:"<%=basePath%>updateInfo",
              type: "post",
              async: false,
              data: {
-      	        user_id: 1,
       	        username:username,
       	        phone:phone,
       	        birthday:birthday,
       	        location:location,
       	        email:email,
-      	        sex:sex
+      	        sex:sex,
               },
              success: function (data) {
             	 window.location.reload();

@@ -34,10 +34,9 @@ public class updatePwd extends HttpServlet {
   }
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	  //HttpSession session = request.getSession();
-	  //Integer user_id = (Integer) session.getAttribute("id");
-	  
-	  int user_id = Integer.parseInt(request.getParameter("user_id"));
+	  HttpSession session = request.getSession();
+	  Integer user_id = (Integer) session.getAttribute("id");
+
 	  String password = request.getParameter("password");
 
       	try {

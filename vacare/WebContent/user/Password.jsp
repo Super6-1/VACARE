@@ -162,7 +162,7 @@
                          </div>
                          <div class="col-md-6 col-sm-6">
                               <ul class="social-icon">
-                                   <li><a data-scroll style="padding: 5px;" href="#start">返回开始</a></li>
+                                   <li><a data-scroll style="padding: 5px;" href="../index.jsp">返回首页</a></li>
 
                               </ul>
                          </div>
@@ -228,7 +228,6 @@
              type: "post",
              async: false,
              data: {
-      	        user_id: 1,
       	        password:password
       	        },
              success: function (data) {

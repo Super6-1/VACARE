@@ -39,12 +39,12 @@ public class CutRecord extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			System.out.println(111);
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		Integer Record_id = Integer.parseInt(request.getParameter("Record_id"));
-			dao.delete(1, Note_id, Record_id);
+			dao.delete(User_id, Note_id, Record_id);
 						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

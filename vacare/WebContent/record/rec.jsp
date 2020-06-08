@@ -130,7 +130,7 @@
                                         <p>
                                            流行性感冒病毒裂解疫苗
                                         </p>
-                                        <a href="#" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a href="../detail1.jsp?name=流感疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
 
@@ -151,7 +151,7 @@
                                         <p>
                                             重组乙型肝炎疫苗（酿酒酵母）
                                         </p>
-                                        <a style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=乙肝疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               <div class="vaccine-recommend">
@@ -171,7 +171,7 @@
                                         <p>
                                             伤寒Vi多糖疫苗
                                         </p>
-                                        <a style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=伤寒菌苗" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               
@@ -198,7 +198,7 @@
                                         <p>
                                             人用狂犬病疫苗（鸡胚细胞）
                                         </p>
-                                        <a style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=狂犬病疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               <div class="vaccine-recommend">
@@ -221,7 +221,7 @@
                                         <p>
                                             水痘减毒活疫苗
                                         </p>
-                                        <a style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a href="../detail1.jsp?name=水痘疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                          </div>

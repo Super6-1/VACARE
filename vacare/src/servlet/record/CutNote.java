@@ -39,12 +39,12 @@ public class CutNote extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
-			RDdao.deleteNote(1, Note_id);
-      		dao.delete(1, Note_id);
+			RDdao.deleteNote(User_id, Note_id);
+      		dao.delete(User_id, Note_id);
 			
 			
 		} catch (SQLException e) {

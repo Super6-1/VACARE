@@ -41,11 +41,11 @@ public class QueryRecord extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	  try {
-		  	//HttpSession session = request.getSession();
-    		//Integer User_id = (Integer) session.getAttribute("id");
+		  	HttpSession session = request.getSession();
+    		Integer User_id = (Integer) session.getAttribute("id");
 		  	Integer Note_id =  Integer.parseInt(request.getParameter("Note_id"));
 		  	
-			List list = dao.selectByNoteid(1, Note_id);
+			List list = dao.selectByNoteid(User_id, Note_id);
 
 		    String CONTENT_TYPE = "application/json; charset=GBK";
 		    response.setContentType(CONTENT_TYPE);

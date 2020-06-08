@@ -44,8 +44,8 @@ public class AddRecord extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		String name = request.getParameter("name");
@@ -56,9 +56,9 @@ public class AddRecord extends HttpServlet {
       		String pic3 = request.getParameter("pic3");
       		String pic4 = request.getParameter("pic4");
       		
-			int num = dao.getMaxNum(1, Note_id); //User_id
+			int num = dao.getMaxNum(User_id, Note_id); //User_id
 			
-			dao.addRecord(1,Note_id, ++num, name, date, text, pic1, pic2, pic3, pic4);
+			dao.addRecord(User_id,Note_id, ++num, name, date, text, pic1, pic2, pic3, pic4);
 			 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

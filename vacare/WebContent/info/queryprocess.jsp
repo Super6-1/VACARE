@@ -1,4 +1,4 @@
-
+﻿
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="com.mysql.jdbc.Statement"%>
@@ -53,59 +53,64 @@
     </section>
 
 
-    <!-- MENU -->
-    <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation">
-        <div class="container">
+        	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
 
-            <div class="navbar-header">
+			 <div class="navbar-header">
 
-                <!-- lOGO TEXT HERE -->
-                <a href="../index.html" class="navbar-brand">VACARE</a>
-            </div>
+				  <!-- lOGO TEXT HERE -->
+				  <a href="../index.jsp" class="navbar-brand">VACARE</a>
+			 </div>
 
-            <!-- MENU LINKS -->
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="../index.html" class="smoothScroll">首页</a></li>
-                         <li><a href="information.jsp" class="smoothScroll">疫苗资讯</a></li>
-                         <li><a href="query.jsp" class="smoothScroll">疫苗查询</a></li>
-                    <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
-                    <li><a href="#" class="smoothScroll">接种信息</a></li>
-                    <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
-                </ul>
-                <ul class="nav navbar-nav" style="float: right;">
-                    <!-- 小人菜单栏-->
-                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
-                                        class="fa fa-user-circle-o fa-lg"></i></a>
-                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                                   <li><a class="dropdown-item" href="../user/Info.jsp"><i
-                                                  class="fa fa-edit fa-lg" ></i> &nbsp;个人资料</a></li>
-                                   <li><a class="dropdown-item" href="../user/Password.jsp"><i
-                                                  class="fa fa-cog fa-lg"x></i> &nbsp;修改密码</a></li>
-                                   <li><a class="dropdown-item" href="../index.html"><i
-                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
-                              </ul>
-                         </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="../index.jsp" class="smoothScroll">首页</a></li>
+					   <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="../maps/address.jsp" class="smoothScroll">接种信息</a></li>
+					   <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="../user/login.jsp" title="登录注册"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+					   </li>
+					   <li class="dropdown"><a data-toggle="dropdown" title="修改信息"><i
+									  class="fa fa-cog fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								 <li><a class="dropdown-item" href="../user/Info.jsp"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="../user/Password.jsp"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href=<%=request.getContextPath() +"/exit"%>><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+					  
+				  </ul>
+			 </div>
+		</div>
+	</section>
 <section>
         <div class="container">
      <div class="block">
-          <h2 style="text-align: center;margin-top: 20px;">查询结果</h2>
+          <h2 style="text-align: center;margin-top: 50px;margin-bottom: 50px;">查询结果</h2>
             
         
    <%
-   request.setCharacterEncoding("UTF-8");
- //模糊查询处理
- String number="";
- String kind="";
- String factory="";
+   request.setCharacterEncoding("UTF-8");//转中文格式
+    
+        String number="";//批号
+        String kind="";  //疫苗类型
+        String factory=""; //生产厂家
 	String content1="";
 	String content2="";
-
-  if(request.getParameter("number")!=null)   	{
+   //查询关键字模糊查询处理
+  if(request.getParameter("number")!=null)   	
+        {
 	  content1=request.getParameter("number");
 	for(int i=0;i< content1.length();i++) {
 		content2=content2+"%"+content1.charAt(i);}
@@ -116,7 +121,8 @@
 	else number="%%";
   
   
-  if(request.getParameter("kind")!=null)  	{
+  if(request.getParameter("kind")!=null)  	
+       {
 	  content1=request.getParameter("kind");
 	for(int i=0;i< content1.length();i++) {
 		content2=content2+"%"+content1.charAt(i);}
@@ -149,7 +155,7 @@
         Statement stm = (Statement) conn.createStatement();
         
         
-        //执行查询
+        //执行查询最多返回200条数据
         ResultSet rs = stm.executeQuery("select VI_Name,VI_Amount,VI_Company,VI_Batch,VI_Specification,VI_Result,VI_department,VI_Validity,VI_IssueDate from vaccineinfo where VI_Batch like'"+number+"' and VI_Name like'"+kind+"' and VI_Company like'"+factory+"' limit 0,200");
 
        %>
@@ -193,14 +199,16 @@
                </tbody>
       
        <% 
+       //关闭数据库连接
        rs.close();
        stm.close();
        conn.close();
        %>
         </table>
+        <div style="height:50px"></div>
             </div>
 
-
+	<div style="height:120px"></div>
 
 </div>
 </section>
@@ -215,7 +223,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <ul class="social-icon">
-                            <li><a data-scroll style="padding: 5px;" href="index.html">返回首页</a></li>
+                            <li><a data-scroll style="padding: 5px;" href="../index.jsp">返回首页</a></li>
                         </ul>
                     </div>
                 </div>

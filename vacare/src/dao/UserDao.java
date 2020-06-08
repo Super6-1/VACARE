@@ -56,4 +56,24 @@ public class UserDao {
 		  stmt.execute(sql);
 	}
 
+	  public user QuerybyName(String name) throws SQLException{
+			String sql = "select * from user where username = '" + name+"'";
+			System.out.println(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			user u = null;
+			if(rs.next()) {
+			u = new user();
+			u.setUser_id(rs.getInt(1));
+			u.setUsername(rs.getString(2));
+			u.setPassword(rs.getString(3));
+			}
+			return u;
+	  }
+	  
+	  public void add(String name, String password) throws SQLException{
+			String sql = "insert into user(user_id, username, password) values( default ,'"+name+"','"+password+"')";
+			System.out.println(sql);
+			stmt.execute(sql);
+		}
+
 }

@@ -50,8 +50,8 @@ public class AddNoteType1WithData extends HttpServlet {
       	try {
       		DateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
       		Calendar calendar = new GregorianCalendar(); 
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		String name = request.getParameter("name");
@@ -59,7 +59,7 @@ public class AddNoteType1WithData extends HttpServlet {
       		String pic = request.getParameter("pic");
       		
 			int num = notedao.getMaxNum(1); //User_id
-			notedao.addType1(1, ++num, name, pic, date);
+			notedao.addType1(User_id, ++num, name, pic, date);
 			
 			 List<stdvac> list = SVdao.selectByNoteid(Note_id);
 			 
@@ -70,7 +70,7 @@ public class AddNoteType1WithData extends HttpServlet {
 				 Date startdate = new java.sql.Date(format.parse(date).getTime()); 
 				 calendar.setTime(startdate); 
 				 calendar.add(calendar.DATE, l.getInternal());
-				 RDdao.addRecordDetails(1, num, l.getSta_id(), l.getName(), l.getDose(),format.format(calendar.getTime()) , batch, 0, site, place, l.getRemark());
+				 RDdao.addRecordDetails(User_id, num, l.getSta_id(), l.getName(), l.getDose(),format.format(calendar.getTime()) , batch, 0, site, place, l.getRemark());
 			 }
 			 
 			 String CONTENT_TYPE = "application/json; charset=GBK";

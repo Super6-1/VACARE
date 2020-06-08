@@ -4,6 +4,10 @@ public class user {
 	private int user_id;
 	private String username, password, email, sex, create_time, phone, birthday, location;
 
+	public user()
+	{
+	}
+	
 	public user(int user_id, String username, String password, String email, String sex, String create_time,
 			String phone, String birthday, String location) {
 		super();

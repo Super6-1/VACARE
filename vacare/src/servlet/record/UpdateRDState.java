@@ -40,8 +40,8 @@ public class UpdateRDState extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		Integer RecordDetails_id = Integer.parseInt(request.getParameter("RecordDetails_id"));
@@ -49,7 +49,7 @@ public class UpdateRDState extends HttpServlet {
       		String batch = request.getParameter("batch");
       		String site = request.getParameter("site");
       		String place = request.getParameter("place");
-			dao.updateState(1, Note_id, RecordDetails_id, date, batch, site, place);
+			dao.updateState(User_id, Note_id, RecordDetails_id, date, batch, site, place);
 						
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

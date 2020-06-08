@@ -34,10 +34,9 @@ public class queryPwd extends HttpServlet {
   }
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	  //HttpSession session = request.getSession();
-	  //Integer user_id = (Integer) session.getAttribute("id");
-	  
-	  int user_id = Integer.parseInt(request.getParameter("user_id"));
+	  HttpSession session = request.getSession();
+	  Integer user_id = (Integer) session.getAttribute("id");
+	  System.out.println(user_id);
       	try {
 			List<user> list = dao.queryPwd(user_id);
 		    String CONTENT_TYPE = "application/json; charset=GBK";

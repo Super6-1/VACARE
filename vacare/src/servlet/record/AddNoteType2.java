@@ -46,15 +46,15 @@ public class AddNoteType2 extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       	try {
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		String name = request.getParameter("name");
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
 			int num = dao.getMaxNum(1); //User_id
-			dao.addType2(1, ++num, name, pic, date);
+			dao.addType2(User_id, ++num, name, pic, date);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

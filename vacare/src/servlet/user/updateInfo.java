@@ -34,17 +34,15 @@ public class updateInfo extends HttpServlet {
   }
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	  //HttpSession session = request.getSession();
-	  //Integer user_id = (Integer) session.getAttribute("id");
+	  HttpSession session = request.getSession();
+	  Integer user_id = (Integer) session.getAttribute("id");
 	  
-	  int user_id = Integer.parseInt(request.getParameter("user_id"));
 	  String username = request.getParameter("username");
 	  String phone = request.getParameter("phone");
 	  String birthday = request.getParameter("birthday");
 	  String location = request.getParameter("location");
 	  String email = request.getParameter("email");
 	  String sex = request.getParameter("sex");
-
 
       	try {
       		dao.updateInfo(user_id,username,phone,birthday,location,email,sex);			

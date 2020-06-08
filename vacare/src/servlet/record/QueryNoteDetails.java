@@ -42,11 +42,11 @@ public class QueryNoteDetails extends HttpServlet {
   
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 	  try {
-		  	//HttpSession session = request.getSession();
-    		//Integer User_id = (Integer) session.getAttribute("id");
+		  	HttpSession session = request.getSession();
+    		Integer User_id = (Integer) session.getAttribute("id");
 		  	Integer Note_id =  Integer.parseInt(request.getParameter("Note_id"));
 		  	Integer state = Integer.parseInt(request.getParameter("state"));
-			List list = dao.selectByNoteidandState(1, Note_id, state);
+			List list = dao.selectByNoteidandState(User_id, Note_id, state);
 
 		    String CONTENT_TYPE = "application/json; charset=GBK";
 		    response.setContentType(CONTENT_TYPE);

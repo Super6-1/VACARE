@@ -48,8 +48,8 @@ public class AddVaccinePlan extends HttpServlet {
       	try {
       		DateFormat format = new SimpleDateFormat("yyyy-MM-dd"); 
       		Calendar calendar = new GregorianCalendar(); 
-      		//HttpSession session = request.getSession();
-      		//Integer User_id = (Integer) session.getAttribute("id");
+      		HttpSession session = request.getSession();
+      		Integer User_id = (Integer) session.getAttribute("id");
 			
       		Integer Note_id = Integer.parseInt(request.getParameter("Note_id"));
       		String name = request.getParameter("name");
@@ -60,11 +60,11 @@ public class AddVaccinePlan extends HttpServlet {
 			String place = "";
 			String remark = "";
       		
-			int num = dao.getMaxNum(1, Note_id)+1; //User_id
+			int num = dao.getMaxNum(User_id, Note_id)+1; //User_id
 			
 			Date startdate = new java.sql.Date(format.parse(date).getTime()); 
 			calendar.setTime(startdate);
-			dao.addRecordDetails(1,Note_id, num, name, dose, format.format(calendar.getTime()) , batch, 0, site, place, remark);
+			dao.addRecordDetails(User_id,Note_id, num, name, dose, format.format(calendar.getTime()) , batch, 0, site, place, remark);
 			 
 			 String CONTENT_TYPE = "application/json; charset=GBK";
 			 response.setContentType(CONTENT_TYPE);
