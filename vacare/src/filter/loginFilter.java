@@ -37,7 +37,11 @@ public class loginFilter implements Filter {
 		String uri = request_uri.substring(ctxPath.length());
 		
 		if(uri.contains("login.jsp") || uri.contains("login")) {
-			chain.doFilter(request, response);
+			if(null != session.getAttribute("id")) {
+				res.setHeader("refresh", "1; url=" + ctxPath + "/index.jsp");
+			} else {
+				chain.doFilter(request, response);
+			}
 		}else
 			if(null != session.getAttribute("id")) {
 				chain.doFilter(request, response);

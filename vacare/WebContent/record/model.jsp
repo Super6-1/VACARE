@@ -84,7 +84,7 @@
 				  </ul>
 			 </div>
 		</div>
-
+</section>
 
     <!-- FEATURE -->
     <section id="record" data-stellar-background-ratio="0.5">

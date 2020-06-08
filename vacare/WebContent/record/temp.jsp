@@ -257,25 +257,8 @@
     <script src="../plugins/layui/layui.js"></script>
     
     <script type="text/javascript">
- /*   //给每一行添加展开或收起的监听
-    $('#DetailTable tbody').on('click', '.details-control', function () {
-        var td = $(this).closest('td');
-        var row = table.row(tr);
-		console.log(row);
-        if ( row.child.isShown() ) {
-            //如果该行已经打开，则关闭
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            //关闭这已行
-            row.child().show();
-            tr.addClass('shown');
-        }
-    });
 
- */   
-    	function updateData(Note_id){
+    	function updateData(Note_id, date){
 	 		$("#DetailTable").dataTable().fnDestroy();
     		$.ajax({
                 url: "<%=basePath%>QueryModelDetails",
@@ -287,7 +270,7 @@
                 success: function (data) {
                     console.log(data);
                     for(i = 0; i < data.length; i++){
-                    	var tmp = new Date();
+                    	var tmp = new Date(date);
                     	tmp.setDate(tmp.getDate() + data[i]['internal']);
                     	data[i]['internal'] = tmp.getFullYear() + "-" + (tmp.getMonth() + 1) + "-" + tmp.getDate();
                     }
@@ -329,8 +312,8 @@
             var liname = document.getElementById("note-li");
             liname.innerHTML = Note_name;
 
-            
-            updateData(Note_id);     
+            var date = new Date();
+            updateData(Note_id, date);     
             $('#add-hiddenarea').hide();
         })
     </script>
@@ -346,7 +329,7 @@
       		,trigger: 'click' //采用click弹出
       		,value: new Date() 
       		,done: function(value, date, endDate){
-      			updateData(Note_id);   
+      			updateData(Note_id, value);   
       		  }
           });
     	  

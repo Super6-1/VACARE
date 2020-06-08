@@ -165,7 +165,7 @@
 										<td> {{ value.name }} </td>
                                         <td> {{ value.dose }} </td>
 										<td> {{ value.date }} </td>
-                                        <td><a href="queryprocess.jsp?number={{value.batch}}" title="查询批次详情"> {{ value.batch }} </a></td>
+                                        <td><a href="../info/queryprocess.jsp?number={{value.batch}}" title="查询批次详情"> {{ value.batch }} </a></td>
                                         <td> {{ value.site }} </td>
                                         <td> {{ value.place }} </td>
                                     </tr>

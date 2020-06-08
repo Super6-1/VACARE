@@ -63,7 +63,7 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="../css/style.css">
-
+	<link rel="stylesheet" href="../plugins/layui/css/layui.css">
 	
 	<script src="../js/modernizr-2.6.2.min.js"></script>
 
@@ -240,7 +240,7 @@
 	<script src="../js/magnific-popup-options.js"></script>
 	<!-- Main -->
 	<script src="../js/main.js"></script>
-
+	<script src="../plugins/layui/layui.js"></script>
 
 	<script type="text/javascript">
 	

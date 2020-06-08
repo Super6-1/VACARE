@@ -574,6 +574,7 @@
                                     async: false,
                                     success: function (data) {
                                         updateData(note_id);
+                                        window.location.reload();
                                     }, error: function (data) {
                                     }
                                 });
@@ -605,7 +606,7 @@
                     })
                     layer.photos({
                     	photos:'.pic4',
-                    })
+                    });
                     
                     $(".fa-trash").hover(function () {
                         var trash = $(this);

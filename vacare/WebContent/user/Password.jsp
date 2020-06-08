@@ -15,13 +15,7 @@
 <head>
 
      <title>VACARE - 知苗</title>
-     <!--
-
-    Template 2106 Soft Landing
-
-	http://www.tooplate.com/view/2106-soft-landing
-
-    -->
+     
      <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
      <meta name="description" content="">
@@ -52,43 +46,47 @@
      </section>
 
 
-     <!-- MENU -->
-     <section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
-          <div class="container">
+	<!-- MENU -->
+	<section class="navbar custom-navbar navbar-fixed-top top-nav-collapse" role="navigation" id="start">
+		<div class="container">
 
-               <div class="navbar-header">
+			 <div class="navbar-header">
 
-                    <!-- lOGO TEXT HERE -->
-                    <a href="../index.html" class="navbar-brand">VACARE</a>
-               </div>
+				  <!-- lOGO TEXT HERE -->
+				  <a href="../index.jsp" class="navbar-brand">VACARE</a>
+			 </div>
 
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                         <li><a href="../index.html" class="smoothScroll">首页</a></li>
-                         <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
-                         <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
-                         <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
-                         <li><a href="../maps/Address.html" class="smoothScroll">接种信息</a></li>
-                         <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav" style="float: right;">
-                         <!-- 小人菜单栏-->
-                         <li class="dropdown"><a href="#" data-toggle="dropdown"><i
-                                        class="fa fa-user-circle-o fa-lg"></i></a>
-                              <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                                   <li><a class="dropdown-item" href="Info.jsp"><i
-                                                  class="fa fa-edit fa-lg" ></i> &nbsp;个人资料</a></li>
-                                   <li><a class="dropdown-item"  href="Password.jsp"><i
-                                                  class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
-                                   <li><a class="dropdown-item" href="../index.html"><i
-                                                  class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
-                              </ul>
-                         </li>
-                    </ul>
-               </div>
-          </div>
-     </section>
+			 <!-- MENU LINKS -->
+			 <div class="collapse navbar-collapse">
+				  <ul class="nav navbar-nav">
+					   <li><a href="../index.jsp" class="smoothScroll">首页</a></li>
+					   <li><a href="../info/information.jsp" class="smoothScroll">疫苗资讯</a></li>
+					   <li><a href="../info/query.jsp" class="smoothScroll">疫苗查询</a></li>
+					   <li><a href="../maps/direction.jsp" class="smoothScroll">疫苗流向</a></li>
+					   <li><a href="../maps/address.jsp" class="smoothScroll">接种信息</a></li>
+					   <li><a href="../record/note.jsp" class="smoothScroll">疫苗本</a></li>
+				  </ul>
+				  <ul class="nav navbar-nav" style="float: right;">
+					   <!-- 小人菜单栏-->
+					   <li class="dropdown"><a href="login.jsp" title="登录注册"><i
+									  class="fa fa-user-circle-o fa-lg"></i></a>
+					   </li>
+					   <li class="dropdown"><a data-toggle="dropdown" title="修改信息"><i
+									  class="fa fa-cog fa-lg"></i></a>
+							<ul class="dropdown-menu settings-menu dropdown-menu-right">
+								 <li><a class="dropdown-item" href="Info.jsp"><i
+												class="fa fa-edit fa-lg"></i> &nbsp;个人资料</a></li>
+								 <li><a class="dropdown-item" href="Password.jsp"><i
+												class="fa fa-cog fa-lg"></i> &nbsp;修改密码</a></li>
+								 <li><a class="dropdown-item" href=<%=request.getContextPath() +"/exit"%>><i
+												class="fa fa-sign-out fa-lg"></i>&nbsp; 安全退出</a></li>
+							</ul>
+					   </li>
+					  
+				  </ul>
+			 </div>
+		</div>
+   </section>
 
 
 
@@ -232,7 +230,7 @@
       	        },
              success: function (data) {
             	 alert("修改成功！");
-            	 var url = "index.jsp";
+            	 var url = "../index.jsp";
                  window.location.href = url;
              }, error: function (data) {
            	     alert("处理异常");

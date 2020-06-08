@@ -130,7 +130,7 @@
                                         <p>
                                            流行性感冒病毒裂解疫苗
                                         </p>
-                                        <a href="../detail1.jsp?name=流感疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a href="../detail1.jsp?name=%25流%25感%25疫%25苗%25" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
 
@@ -151,13 +151,13 @@
                                         <p>
                                             重组乙型肝炎疫苗（酿酒酵母）
                                         </p>
-                                        <a  href="../detail1.jsp?name=乙肝疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=%25乙%25肝%25疫%25苗%25" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               <div class="vaccine-recommend">
                                    <a data-toggle="collapse" href="#collapseExample2" aria-expanded="false"
                                         aria-controls="collapseExample2">
-                                        <h4 id="vaccine-name">伤寒菌苗</h4>
+                                        <h4 id="vaccine-name">伤寒疫苗</h4>
                                    </a>
                                    <div class="record-icons" style="font-size: 24px; margin-top: -36px;">
                                         <i class="record-icon fa fa-plus" style="padding-left:15px"></i>
@@ -171,7 +171,7 @@
                                         <p>
                                             伤寒Vi多糖疫苗
                                         </p>
-                                        <a  href="../detail1.jsp?name=伤寒菌苗" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=%25伤%25寒%25疫%25苗%25" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               
@@ -198,7 +198,7 @@
                                         <p>
                                             人用狂犬病疫苗（鸡胚细胞）
                                         </p>
-                                        <a  href="../detail1.jsp?name=狂犬病疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a  href="../detail1.jsp?name=%25狂%25犬%25病%25疫%25苗%25" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                               <div class="vaccine-recommend">
@@ -221,7 +221,7 @@
                                         <p>
                                             水痘减毒活疫苗
                                         </p>
-                                        <a href="../detail1.jsp?name=水痘疫苗" style="float: right; margin-top: -30px;">了解详情…</a>
+                                        <a href="../detail1.jsp?name=%25水%25痘%25疫%25苗%25" style="float: right; margin-top: -30px;">了解详情…</a>
                                    </div>
                               </div>
                          </div>
@@ -283,8 +283,8 @@
                           },
                           async: false,
                           success: function (data) {
-                        	  var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-                        	  parent.layer.close(index); //再执行关闭
+                        	  
+                        	  parent.layer.closeAll('iframe'); //再执行关闭
                           }, error: function (data) {
                           }
                       });
