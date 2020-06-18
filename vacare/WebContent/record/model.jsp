@@ -6,6 +6,7 @@
 %>
 
 <!DOCTYPE html>
+<!-- 董嘉懿 -->
 <html lang="en">
 
 <head>
@@ -197,7 +198,9 @@
 	<script src="../js/template.js"></script>
     <script src="../plugins/layui/layui.js"></script>
     <script>
+    	//页面准备
         $(document).ready(function () {
+        	//获取模板
             $.ajax({
                 url: "../QueryModel",
                 type: "post",
@@ -212,6 +215,7 @@
             $('#add-hiddenarea').hide();
         });
         
+    	//点击具体模板
          $('body').on('click', '.record-model', function () {
         	var note_name = $(this).children(".note_name").text();
             var note_id = $(this).children(".note-id").text();
@@ -220,6 +224,7 @@
             window.location.href = url; 
          });
 
+    	//点击加号，新增病历本
          $('body').on('click', '.record-icon.fa-plus', function () {
             var Note_id = $(this).parent().parent().children(".note-id").text();
          	
@@ -289,6 +294,7 @@
              return false;
          })
 
+         //显示注释
         layui.use('layer', function () { //独立版的layer无需执行这一句
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
 

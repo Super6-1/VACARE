@@ -1,5 +1,5 @@
 package servlet.record;
-
+//∂≠ºŒ‹≤
 import java.io.*;
 import java.sql.Connection;
 import java.sql.Date;
@@ -56,7 +56,7 @@ public class AddRecord extends HttpServlet {
       		String pic3 = request.getParameter("pic3");
       		String pic4 = request.getParameter("pic4");
       		
-			int num = dao.getMaxNum(User_id, Note_id); //User_id
+			int num = dao.getMaxNum(User_id, Note_id); 
 			
 			dao.addRecord(User_id,Note_id, ++num, name, date, text, pic1, pic2, pic3, pic4);
 			 

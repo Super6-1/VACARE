@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 董嘉懿 -->
 <head>
 
     <title>VACARE - 知苗</title>
@@ -258,6 +258,7 @@
     
     <script type="text/javascript">
 
+    	//初始化数据
     	function updateData(Note_id, date){
 	 		$("#DetailTable").dataTable().fnDestroy();
     		$.ajax({
@@ -301,6 +302,7 @@
             });
     	}	
     
+    	//页面初始化
         $(document).ready(function () {
 
             var url = window.location.href;
@@ -319,6 +321,7 @@
     </script>
     
     <script type="text/javascript">
+    //渲染日期
     layui.use('laydate', function(){
     	  var laydate = layui.laydate;
           var url = window.location.href;
@@ -339,6 +342,7 @@
     </script>
     
     <script type="text/javascript">
+    //增加疫苗本
     $('body').on('click', '.record-icon.fa-plus', function () {
     	var url = window.location.href;
         var Note_id = url.split('=')[1].split('&')[0];
@@ -388,7 +392,7 @@
                             success: function (data) {
                             	console.log(data);
                             	 var url = "type1.jsp?Note_id=" + data + "&Note_name=" + name;
-                                 window.location.href = url;
+                                 window.location.href = url;//跳转页面
                             }, error: function (data) {
                             }
                         });
@@ -409,7 +413,7 @@
         return false;
     })
 
-
+	//添加注释
      layui.use('layer', function () { //独立版的layer无需执行这一句
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
 

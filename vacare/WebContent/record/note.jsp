@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 董嘉懿 -->
 <head>
 
     <title>VACARE - 知苗</title>
@@ -275,6 +275,7 @@
     <script src="../js/template.js"></script>
     <script src="../plugins/layui/layui.js"></script>
     <script>
+    	//更新数据
         function updateData() {
             $.ajax({
                 url: "<%=basePath%>QueryNote",
@@ -325,14 +326,16 @@
             
             
         }
-
+    	
+		//页面准备
         $(document).ready(function () {
             updateData();
             $('#changePic').hide();
             $('#addType1-hiddenarea').hide();
             $('#addType2-hiddenarea').hide();
         })
-
+		
+        //点击疫苗本
         $('body').on('click', '.record-details', function () {
             var note_id = $(this).children().children().children(".note-id").text();
             var note_name = $(this).children().children().children(".note-name").text();
@@ -347,6 +350,7 @@
             }
         });
 
+		//添加注释
         layui.use('layer', function () { //独立版的layer无需执行这一句
             var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
             $(".fa-trash").hover(function () {
@@ -381,6 +385,7 @@
             }
         });
 
+		//删除疫苗本
         $('body').on('click', '.fa-trash', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             layui.use('layer', function () { //独立版的layer无需执行这一句
@@ -405,7 +410,7 @@
             return false;
         })
 
-        
+		//修改标题        
         $('body').on('click', '.record-icon.fa-tag', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             var note_name = $(this).parent().parent().children(".note-name").text();
@@ -441,7 +446,7 @@
             return false;
         })
         
-        
+        //修改封面照片
         $('body').on('click', '.record-icon.fa-photo', function () {
             var note_id = $(this).parent().parent().children(".note-id").text();
             var note_name = $(this).parent().parent().children(".note-name").text();
@@ -506,6 +511,7 @@
     </script>
 
 	<script>
+		//添加疫苗本
 		$("#addType1").click(function(){	
 	        layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
 	            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
@@ -571,6 +577,7 @@
     	});
 	  
     
+		//添加记录本
 		$("#addType2").click(function(){	
 	        layui.use(['layer','laydate','form'], function () { //独立版的layer无需执行这一句
 	            var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句

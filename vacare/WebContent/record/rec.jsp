@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 董嘉懿 -->
 <head>
 
      <title>VACARE - 知苗</title>
@@ -250,6 +250,7 @@
           });
 
 		
+          //添加疫苗
           $('body').on('click', '.record-icon.fa-plus', function () {
         	  var name = $(this).parent().parent().children().children("#vaccine-name").text();
         	  layui.use('form', function () {
@@ -262,7 +263,7 @@
              });
           });
           
-          
+          //添加计划接种疫苗
           $('body').on('click', '#submit', function () {
         	  layui.use('form', function () {
              	   var form = layui.form;
@@ -300,7 +301,7 @@
               return false;  
           });
 
-          
+          //渲染日期
           layui.use(['layer', 'laydate'], function () { //独立版的layer无需执行这一句
                var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
                var laydate = layui.laydate;

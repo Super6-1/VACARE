@@ -60,7 +60,7 @@ public class AddVaccinePlan extends HttpServlet {
 			String place = "";
 			String remark = "";
       		
-			int num = dao.getMaxNum(User_id, Note_id)+1; //User_id
+			int num = dao.getMaxNum(User_id, Note_id)+1; 
 			
 			Date startdate = new java.sql.Date(format.parse(date).getTime()); 
 			calendar.setTime(startdate);

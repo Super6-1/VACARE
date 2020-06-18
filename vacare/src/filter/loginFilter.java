@@ -1,5 +1,5 @@
 package filter;
-
+//¶­¼ÎÜ²
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -36,16 +36,16 @@ public class loginFilter implements Filter {
 		String ctxPath = req.getContextPath();
 		String uri = request_uri.substring(ctxPath.length());
 		
-		if(uri.contains("login.jsp") || uri.contains("login")) {
-			if(null != session.getAttribute("id")) {
+		if(uri.contains("login.jsp") || uri.contains("login")) {//µÇÂ¼Ò³ÃæÔò¼ÌÐø
+			if(null != session.getAttribute("id")) {//ÒÑµÇÂ¼Ôò·µ»ØÊ×Ò³
 				res.setHeader("refresh", "1; url=" + ctxPath + "/index.jsp");
 			} else {
 				chain.doFilter(request, response);
 			}
 		}else
-			if(null != session.getAttribute("id")) {
+			if(null != session.getAttribute("id")) {//ÒÑµÇÂ¼
 				chain.doFilter(request, response);
-			} else {
+			} else {//Î´µÇÂ¼
 				res.setHeader("refresh", "1; url=" + ctxPath + "/user/login.jsp");
 				return;
 			}

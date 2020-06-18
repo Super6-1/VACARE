@@ -35,7 +35,7 @@ public class UploadImage extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
   		Integer User_id = (Integer) session.getAttribute("id");
-		Part part = request.getPart("file");
+		Part part = request.getPart("file");//获取文件
 
 		try {
 

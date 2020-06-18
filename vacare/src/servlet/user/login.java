@@ -41,7 +41,7 @@ public class login extends HttpServlet {
           
           PrintWriter out = response.getWriter();
           if(u.getPassword().equals(Password)) {
-        	  out.println("123");
+        	  out.println("123");//·µ»ØÊý¾Ý
         	  session.setAttribute("id", u.getUser_id());
           }
 	} catch (Exception e) {

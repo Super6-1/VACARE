@@ -23,7 +23,7 @@ public class exit extends HttpServlet {
 	  {
 		  HttpSession session = request.getSession(true);
 	      
-	      session.removeAttribute("id");
+	      session.removeAttribute("id");//删除对话中属性
 	      String ctxPath = request.getContextPath();
 		  response.sendRedirect(ctxPath + "/index.jsp");
 

@@ -65,7 +65,7 @@
         <url-pattern>/updateInfo</url-pattern>
     </servlet-mapping>
     
-        <filter>
+     <filter>
     	<filter-name>loginFilter</filter-name>
     	<filter-class>filter.loginFilter </filter-class>
     </filter>

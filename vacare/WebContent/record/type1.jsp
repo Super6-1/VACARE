@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 董嘉懿 -->
 <head>
 
      <title>VACARE - 知苗</title>
@@ -281,6 +281,7 @@
      <script src="../js/template.js"></script>
      <script src="../plugins/layui/layui.js"></script>
      <script>
+     	  //更新数据函数
           function updateData(Note_id) {
         	  $("#DetailTable").dataTable().fnDestroy();
         	  
@@ -353,6 +354,7 @@
               
           }
 
+     	  //页面初始化
           $(document).ready(function () {
 
                var url = window.location.href;
@@ -384,7 +386,8 @@
                $('#complete-hiddenarea').hide();
                
           })
-
+          
+		  //删除按钮
           $('body').on('click', '.record-icon.fa-trash', function () {
 
                var note_id = document.URL.split('=')[1].split('&')[0];
@@ -412,6 +415,7 @@
                return false;
           })
 
+          //完成按钮
           $('body').on('click', '.record-icon.fa-check-square-o', function () {
 
                var note_id = document.URL.split('=')[1].split('&')[0];
@@ -473,6 +477,7 @@
                return false;
           });
 
+     	  //日期选择按钮
           $('body').on('click', '.record-icon.fa-calendar', function () {
 
                var note_id = document.URL.split('=')[1].split('&')[0];
@@ -550,6 +555,7 @@
      </script>
 
 	<script>
+		//疫苗添加
     	$('body').on('click', '.record-icon.fa-plus', function () {
             //弹出即全屏
             var note_id = document.URL.split('=')[1].split('&')[0];
@@ -571,6 +577,7 @@
 
 
      <script>
+     		//渲染注释
      	  layui.use('form', function(){
     	  	var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
     	  	form.render();

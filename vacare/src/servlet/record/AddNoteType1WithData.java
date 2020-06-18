@@ -1,5 +1,5 @@
 package servlet.record;
-
+//董嘉懿
 import java.io.*;
 import java.sql.Connection;
 import java.sql.Date;
@@ -58,15 +58,15 @@ public class AddNoteType1WithData extends HttpServlet {
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = notedao.getMaxNum(1); //User_id
-			notedao.addType1(User_id, ++num, name, pic, date);
+			int num = notedao.getMaxNum(1); 
+			notedao.addType1(User_id, ++num, name, pic, date);//新增疫苗本
 			
-			 List<stdvac> list = SVdao.selectByNoteid(Note_id);
+			 List<stdvac> list = SVdao.selectByNoteid(Note_id);//获取疫苗范本数据
 			 
 			 String batch = "";
 			 String site = "";
 			 String place = "";
-			 for(stdvac l:list) {
+			 for(stdvac l:list) {//增加待接种疫苗
 				 Date startdate = new java.sql.Date(format.parse(date).getTime()); 
 				 calendar.setTime(startdate); 
 				 calendar.add(calendar.DATE, l.getInternal());

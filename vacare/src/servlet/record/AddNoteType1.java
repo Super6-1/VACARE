@@ -1,5 +1,5 @@
 package servlet.record;
-
+//∂≠ºŒ‹≤
 import java.io.*;
 import java.sql.SQLException;
 
@@ -37,7 +37,7 @@ public class AddNoteType1 extends HttpServlet {
       		String date = request.getParameter("date");
       		String pic = request.getParameter("pic");
       		
-			int num = dao.getMaxNum(User_id); //User_id
+			int num = dao.getMaxNum(User_id); 
 			dao.addType1(User_id, ++num, name, pic, date);
 			
 		} catch (SQLException e) {

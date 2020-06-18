@@ -44,7 +44,7 @@ public class register extends HttpServlet {
       try {
 		user u = dao.QuerybyName(name);
 		System.out.println(u);
-		if(u != null) {
+		if(u != null) {//已存在用户
 		}else {
 			dao.add(name, password);
 	    	PrintWriter out = response.getWriter();

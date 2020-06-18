@@ -7,7 +7,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- 董嘉懿 -->
 <head>
 
     <title>VACARE - 知苗</title>
@@ -344,6 +344,7 @@
         <script src="../js/template.js"></script>
         <script src="../plugins/layui/layui.js"></script>
         <script>
+        //更新数据
             function updateData(Note_id) {
                 $.ajax({
                     url: "<%=basePath%>QueryRecord",
@@ -385,6 +386,7 @@
             </script>
             
         <script>
+        //页面启动
             $(document).ready(function () {
                 var url = window.location.href;
                 var Note_id = url.split('=')[1].split('&')[0];
@@ -441,7 +443,7 @@
                 return false;
             })
 
-
+            //更新内容
             $('body').on('click', '.record-icon.fa-tag', function () {
                 var note_id = document.URL.split('=')[1].split('&')[0];
                 var record_id = $(this).parent().parent().parent().children(".col-md-9").children(".record_id").text();
@@ -474,7 +476,7 @@
                 return false;
             })
 
-            //增加
+            //增加按钮
             $('body').on('click', '#add-record', function () {
 
                 var note_id = document.URL.split('=')[1].split('&')[0];
@@ -540,10 +542,11 @@
 									layer.msg("请填写疫苗名称！");
 									return false;
 								}
-								var pic1 = null;
+								var pic1 = null;//处理空图片
 								var pic2 = null;
 								var pic3 = null;
 								var pic4 = null;
+							
 								if(multiple_images.length > 0){
 									var pic1 = "../../" + multiple_images[0];
 								}
@@ -592,6 +595,7 @@
                 });
                 </script>
                  <script>
+                 //渲染解释
                 layui.use('layer', function () { //独立版的layer无需执行这一句
                     var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
                     
